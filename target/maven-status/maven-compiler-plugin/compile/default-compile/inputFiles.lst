@@ -1,0 +1,10 @@
+/home/halley/Documents/[1] Projects/learning_spring/hello_world/src/main/java/com/inventoryProject/controllers/ProductController.java
+/home/halley/Documents/[1] Projects/learning_spring/hello_world/src/main/java/com/inventoryProject/helloworld.java
+/home/halley/Documents/[1] Projects/learning_spring/hello_world/src/main/java/com/inventoryProject/models/Brand.java
+/home/halley/Documents/[1] Projects/learning_spring/hello_world/src/main/java/com/inventoryProject/models/Color.java
+/home/halley/Documents/[1] Projects/learning_spring/hello_world/src/main/java/com/inventoryProject/models/Product.java
+/home/halley/Documents/[1] Projects/learning_spring/hello_world/src/main/java/com/inventoryProject/models/ProductVariant.java
+/home/halley/Documents/[1] Projects/learning_spring/hello_world/src/main/java/com/inventoryProject/models/Size.java
+/home/halley/Documents/[1] Projects/learning_spring/hello_world/src/main/java/com/inventoryProject/repositories/BrandRepository.java
+/home/halley/Documents/[1] Projects/learning_spring/hello_world/src/main/java/com/inventoryProject/repositories/ProductRepository.java
+/home/halley/Documents/[1] Projects/learning_spring/hello_world/src/main/java/com/inventoryProject/services/ProductService.java
