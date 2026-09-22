@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.inventoryProject.services.ProductService;
+import com.inventoryProject.dto.ProductResponseDTO;
 import com.inventoryProject.dto.Productdto;
 import com.inventoryProject.models.Product;
 
@@ -28,10 +29,10 @@ public class ProductController {
     this.productService = productService;
   }
 
-  @GetMapping
+  @GetMapping("/all")
   @ResponseBody
-  public List<Product> getAll() {
-    return productService.findAll();
+  public ResponseEntity<List<ProductResponseDTO>> getAll() {
+    return ResponseEntity.ok(productService.findAll());
   }
 
   @PostMapping("/create")
@@ -40,8 +41,13 @@ public class ProductController {
   }
 
   @GetMapping("/{productId}")
-  public ResponseEntity<Productdto> get(@PathVariable Long productId) {
+  public ResponseEntity<ProductResponseDTO> get(@PathVariable Long productId) {
     return ResponseEntity.ok(productService.get(productId));
   }
 
+  // function that manages output of products
+  @GetMapping("brand/{brandId}")
+  public ResponseEntity<List<ProductResponseDTO>> getByBrand(@PathVariable Long brandId) {
+    return ResponseEntity.ok(productService.getByBrand(brandId));
+  }
 }
