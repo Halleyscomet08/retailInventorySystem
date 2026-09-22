@@ -34,7 +34,7 @@ public class ProductController {
     return productService.findAll();
   }
 
-  @PostMapping()
+  @PostMapping("/create")
   public ResponseEntity<Productdto> create(@RequestBody Productdto dto) {
     return ResponseEntity.ok(productService.create(dto));
   }
