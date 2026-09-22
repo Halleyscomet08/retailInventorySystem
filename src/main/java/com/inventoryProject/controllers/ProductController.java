@@ -39,7 +39,7 @@ public class ProductController {
     return ResponseEntity.ok(productService.create(dto));
   }
 
-  @GetMapping()
+  @GetMapping("/{productId}")
   public ResponseEntity<Productdto> get(@PathVariable Long productId) {
     return ResponseEntity.ok(productService.get(productId));
   }
