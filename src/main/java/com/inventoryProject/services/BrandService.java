@@ -1,5 +1,7 @@
 package com.inventoryProject.services;
 
+import org.springframework.stereotype.Service;
+
 import com.inventoryProject.dto.BrandDTO;
 import com.inventoryProject.models.Brand;
 import com.inventoryProject.repositories.BrandRepository;
@@ -7,6 +9,7 @@ import com.inventoryProject.repositories.BrandRepository;
 /**
  * BrandService
  */
+@Service
 public class BrandService {
 
   private final BrandRepository brandRepository;

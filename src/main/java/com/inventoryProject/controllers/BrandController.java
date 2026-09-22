@@ -3,7 +3,9 @@ package com.inventoryProject.controllers;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.inventoryProject.dto.BrandDTO;
@@ -13,6 +15,7 @@ import com.inventoryProject.services.BrandService;
  * BrandController
  */
 @RestController
+@RequestMapping("/api/brand")
 public class BrandController {
 
   private final BrandService brandService;
@@ -26,6 +29,7 @@ public class BrandController {
     return ResponseEntity.ok(brandService.get(brandId));
   }
 
+  @PostMapping("/create")
   public ResponseEntity<BrandDTO> create(@RequestBody BrandDTO dto) {
     return ResponseEntity.ok(brandService.create(dto));
 
