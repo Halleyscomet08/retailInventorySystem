@@ -26,10 +26,11 @@ public class ProductService {
   }
 
   public List<ProductResponseDTO> findAll() {
-    return productRepository.findAll().stream().map(this::toResponseDTO).toList();
+    List<Product> products = productRepository.findAll();
+    return products.stream().map(this::toResponseDTO).toList();
   }
 
-  public Productdto create(Productdto dto) {
+  public ProductResponseDTO create(Productdto dto) {
     Product product = new Product();
     Brand brand = brandRepository.findById(dto.getBrand())
         .orElseThrow(() -> new RuntimeException("Brand not found"));
@@ -38,7 +39,7 @@ public class ProductService {
     product.setproductName(dto.getProductName());
     product.setCategory(dto.getCategory());
 
-    return toDTO(productRepository.save(product));
+    return toResponseDTO(productRepository.save(product));
   }
 
   public ProductResponseDTO get(Long productId) {
