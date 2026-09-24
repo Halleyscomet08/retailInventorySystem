@@ -3,7 +3,6 @@ package com.inventoryProject.controller;
 import com.inventoryProject.controllers.BrandController;
 import com.inventoryProject.dto.BrandDTO;
 import com.inventoryProject.services.BrandService;
-import com.jayway.jsonpath.JsonPath;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
