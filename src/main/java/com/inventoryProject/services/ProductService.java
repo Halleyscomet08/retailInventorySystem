@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 
 import com.inventoryProject.dto.ProductResponseDTO;
 import com.inventoryProject.dto.Productdto;
+import com.inventoryProject.exception.ResourceNotFoundException;
 import com.inventoryProject.models.Brand;
 import com.inventoryProject.models.Product;
 import com.inventoryProject.repositories.BrandRepository;
@@ -35,7 +36,7 @@ public class ProductService {
   public ProductResponseDTO create(Productdto dto) {
     Product product = new Product();
     Brand brand = brandRepository.findById(dto.getBrand())
-        .orElseThrow(() -> new RuntimeException("Brand not found"));
+        .orElseThrow(() -> new ResourceNotFoundException("Brand not found"));
 
     product.setBrand(brand);
     product.setproductName(dto.getProductName());
@@ -46,7 +47,7 @@ public class ProductService {
 
   public ProductResponseDTO get(Long productId) {
     Product product = productRepository.findById(productId)
-        .orElseThrow(() -> new RuntimeException("Product not found"));
+        .orElseThrow(() -> new ResourceNotFoundException("Product not found"));
 
     return toResponseDTO(product);
   }
@@ -61,9 +62,9 @@ public class ProductService {
   @Transactional(rollbackOn = Exception.class)
   public ProductResponseDTO update(Long productId, Productdto dto) {
     Product product = productRepository.findById(productId)
-        .orElseThrow(() -> new RuntimeException("Product not Found"));
+        .orElseThrow(() -> new ResourceNotFoundException("Product not Found"));
     Brand brand = brandRepository.findById(dto.getBrand())
-        .orElseThrow(() -> new RuntimeException("Brand not found"));
+        .orElseThrow(() -> new ResourceNotFoundException("Brand not found"));
 
     product.setBrand(brand);
     product.setproductName(dto.getProductName());
