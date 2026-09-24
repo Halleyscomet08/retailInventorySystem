@@ -77,8 +77,17 @@ public class ProductService {
     return toResponseDTO(updated);
   }
 
-  public void delete(Long productID) {
+  @Transactional(rollbackOn = Exception.class)
+  public void archiveProduct(Long productID) {
+    Product product = productRepository.findById(productID)
+        .orElseThrow(() -> new ResourceNotFoundException("Product Not Found"));
+    // in the future once the variants table is setup, query for variants
+    // where productID = product.getproductId(), foreach(variant ->
+    // variant.setdeletedAt(current_date))
+    // For now,
+    product.setStatus(EntityMode.ARCHIVED);
 
+    productRepository.save(product);
   }
 
   private ProductResponseDTO toResponseDTO(Product product) {
