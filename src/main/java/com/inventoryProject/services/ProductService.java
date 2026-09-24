@@ -9,6 +9,8 @@ import com.inventoryProject.models.Product;
 import com.inventoryProject.repositories.BrandRepository;
 import com.inventoryProject.repositories.ProductRepository;
 
+import jakarta.transaction.Transactional;
+
 import java.util.List;
 
 /**
@@ -54,6 +56,22 @@ public class ProductService {
     List<Product> products = productRepository.findByBrand_BrandId(brandId);
     return products.stream().map(this::toResponseDTO).toList();
 
+  }
+
+  @Transactional(rollbackOn = Exception.class)
+  public ProductResponseDTO update(Long productId, Productdto dto) {
+    Product product = productRepository.findById(productId)
+        .orElseThrow(() -> new RuntimeException("Product not Found"));
+    Brand brand = brandRepository.findById(dto.getBrand())
+        .orElseThrow(() -> new RuntimeException("Brand not found"));
+
+    product.setBrand(brand);
+    product.setproductName(dto.getProductName());
+    product.setCategory(dto.getCategory());
+
+    Product updated = productRepository.save(product);
+
+    return toResponseDTO(updated);
   }
 
   private ProductResponseDTO toResponseDTO(Product product) {
