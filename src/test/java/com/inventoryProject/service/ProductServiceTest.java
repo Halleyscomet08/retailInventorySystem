@@ -90,4 +90,44 @@ public class ProductServiceTest {
 
   }
 
+  @Test
+  void updateProduct_whenGivenDTO() {
+    Productdto input = new Productdto();
+    input.setBrand(2L);
+    input.setProductName("Barong");
+    input.setCategory("Outerwear");
+    Long productId = 1L;
+
+    Brand initialBrand = new Brand();
+    initialBrand.setBrandID(1L);
+    initialBrand.setBrandName("Blueshop");
+
+    Product initialProduct = new Product();
+    initialProduct.setproductId(1L);
+    initialProduct.setproductName("Polo");
+    initialProduct.setBrand(initialBrand);
+    initialProduct.setCategory("Outerwear");
+
+    Brand newBrand = new Brand();
+    newBrand.setBrandID(2L);
+    newBrand.setBrandName("Well-off");
+
+    Product newProduct = new Product();
+    newProduct.setproductId(1L);
+    newProduct.setproductName("Barong");
+    newProduct.setBrand(newBrand);
+    newProduct.setCategory("Outerwear");
+
+    when(productRepository.save(any(Product.class))).thenReturn(newProduct);
+    when(productRepository.findById(1L)).thenReturn(Optional.of(initialProduct));
+    when(brandRepository.findById(2L)).thenReturn(Optional.of(newBrand));
+
+    ProductResponseDTO response = productService.update(productId, input);
+
+    assertNotNull(response.getProductId());
+    assertEquals("Barong", response.getProductName());
+    assertEquals("Well-off", response.getBrandName());
+    assertEquals("Outerwear", response.getCategory());
+  }
+
 }
