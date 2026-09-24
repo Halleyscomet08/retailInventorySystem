@@ -61,7 +61,7 @@ public class ProductController {
     return ResponseEntity.ok(productService.update(productId, dto));
   }
 
-  @PatchMapping("/{product_id}/archive")
+  @PatchMapping("/{productId}/archive")
   public ResponseEntity<String> archive(@PathVariable Long productId) {
     productService.archiveProduct(productId);
     return ResponseEntity.ok("Product Archived Successfully");
