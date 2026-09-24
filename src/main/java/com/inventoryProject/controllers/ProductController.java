@@ -3,6 +3,7 @@ package com.inventoryProject.controllers;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,6 +20,7 @@ import com.inventoryProject.models.Product;
 /**
  * ProductController
  */
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/api/product")
 public class ProductController {
@@ -36,7 +38,7 @@ public class ProductController {
   }
 
   @PostMapping("/create")
-  public ResponseEntity<Productdto> create(@RequestBody Productdto dto) {
+  public ResponseEntity<ProductResponseDTO> create(@RequestBody Productdto dto) {
     return ResponseEntity.ok(productService.create(dto));
   }
 
