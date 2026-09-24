@@ -7,6 +7,7 @@ import com.inventoryProject.dto.Productdto;
 import com.inventoryProject.exception.ResourceNotFoundException;
 import com.inventoryProject.models.Brand;
 import com.inventoryProject.models.Product;
+import com.inventoryProject.models.EntityMode;
 import com.inventoryProject.repositories.BrandRepository;
 import com.inventoryProject.repositories.ProductRepository;
 
@@ -29,7 +30,8 @@ public class ProductService {
   }
 
   public List<ProductResponseDTO> findAll() {
-    List<Product> products = productRepository.findAll();
+    List<Product> products = productRepository
+        .findAllByStatus(EntityMode.ACTIVE);
     return products.stream().map(this::toResponseDTO).toList();
   }
 
@@ -73,6 +75,10 @@ public class ProductService {
     Product updated = productRepository.save(product);
 
     return toResponseDTO(updated);
+  }
+
+  public void delete(Long productID) {
+
   }
 
   private ProductResponseDTO toResponseDTO(Product product) {
