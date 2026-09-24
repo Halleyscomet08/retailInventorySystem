@@ -16,7 +16,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
   public List<Product> findByBrand_BrandId(Long brandId);
 
-  @Query("SELECT b FROM Brand b WHERE b.status = :status")
+  @Query("SELECT p FROM Product p WHERE p.status = :status")
   public List<Product> findAllByStatus(@Param("status") EntityMode status);
 
 }
