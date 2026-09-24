@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.inventoryProject.services.ProductService;
+
+import jakarta.validation.Valid;
+
 import com.inventoryProject.dto.ProductResponseDTO;
 import com.inventoryProject.dto.Productdto;
 
@@ -48,7 +51,7 @@ public class ProductController {
   }
 
   @PostMapping
-  public ResponseEntity<ProductResponseDTO> create(@RequestBody Productdto dto) {
+  public ResponseEntity<ProductResponseDTO> create(@Valid @RequestBody Productdto dto) {
     return ResponseEntity.status(HttpStatus.CREATED).body(productService.create(dto));
   }
 
