@@ -2,6 +2,8 @@ package com.inventoryProject.models;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -18,6 +20,9 @@ public class Brand {
 
   @Column
   private String brandName;
+
+  @Enumerated(EnumType.STRING)
+  private EntityMode status = EntityMode.ACTIVE;
 
   public Brand() {
   }
@@ -38,4 +43,11 @@ public class Brand {
     this.brandName = brandName;
   }
 
+  public EntityMode getStatus() {
+    return status;
+  }
+
+  public void setStatus(EntityMode status) {
+    this.status = status;
+  }
 }
