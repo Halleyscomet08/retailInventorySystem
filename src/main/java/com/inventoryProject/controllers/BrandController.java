@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.inventoryProject.dto.BrandDTO;
 import com.inventoryProject.services.BrandService;
 
+import jakarta.validation.Valid;
+
 /**
  * BrandController
  */
@@ -30,7 +32,7 @@ public class BrandController {
   }
 
   @PostMapping("/create")
-  public ResponseEntity<BrandDTO> create(@RequestBody BrandDTO dto) {
+  public ResponseEntity<BrandDTO> create(@Valid @RequestBody BrandDTO dto) {
     return ResponseEntity.ok(brandService.create(dto));
 
   }
