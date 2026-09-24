@@ -31,7 +31,7 @@ public class BrandController {
     return ResponseEntity.ok(brandService.get(brandId));
   }
 
-  @PostMapping("/create")
+  @PostMapping()
   public ResponseEntity<BrandDTO> create(@Valid @RequestBody BrandDTO dto) {
     return ResponseEntity.ok(brandService.create(dto));
 
