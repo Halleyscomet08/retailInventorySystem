@@ -8,7 +8,6 @@ import com.inventoryProject.exception.ResourceNotFoundException;
 import com.inventoryProject.models.Brand;
 import com.inventoryProject.models.Product;
 import com.inventoryProject.models.EntityMode;
-import com.inventoryProject.repositories.BrandRepository;
 import com.inventoryProject.repositories.ProductRepository;
 
 import jakarta.transaction.Transactional;
@@ -22,11 +21,11 @@ import java.util.List;
 public class ProductService {
 
   private final ProductRepository productRepository;
-  private final BrandRepository brandRepository;
+  private final BrandService brandService;
 
-  public ProductService(ProductRepository productRepository, BrandRepository brandRepository) {
+  public ProductService(ProductRepository productRepository, BrandService brandService) {
     this.productRepository = productRepository;
-    this.brandRepository = brandRepository;
+    this.brandService = brandService;
   }
 
   public List<ProductResponseDTO> findAll() {
@@ -37,8 +36,8 @@ public class ProductService {
 
   public ProductResponseDTO create(Productdto dto) {
     Product product = new Product();
-    Brand brand = brandRepository.findById(dto.getBrand())
-        .orElseThrow(() -> new ResourceNotFoundException("Brand not found"));
+
+    Brand brand = brandService.findBrandbyId(dto.getBrand());
 
     product.setBrand(brand);
     product.setproductName(dto.getProductName());
@@ -65,8 +64,8 @@ public class ProductService {
   public ProductResponseDTO update(Long productId, Productdto dto) {
     Product product = productRepository.findById(productId)
         .orElseThrow(() -> new ResourceNotFoundException("Product not Found"));
-    Brand brand = brandRepository.findById(dto.getBrand())
-        .orElseThrow(() -> new ResourceNotFoundException("Brand not found"));
+
+    Brand brand = brandService.findBrandbyId(dto.getBrand());
 
     product.setBrand(brand);
     product.setproductName(dto.getProductName());
@@ -103,14 +102,4 @@ public class ProductService {
 
   }
 
-  private Productdto toDTO(Product product) {
-
-    Productdto dto = new Productdto();
-
-    dto.setBrand(product.getBrand().getBrandID());
-    dto.setProductName(product.getproductName());
-    dto.setCategory(product.getCategory());
-
-    return dto;
-  }
 }

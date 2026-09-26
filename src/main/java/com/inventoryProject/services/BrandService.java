@@ -27,6 +27,10 @@ public class BrandService {
         .orElseThrow(() -> new ResourceNotFoundException("Brand not found")));
   }
 
+  public Brand findBrandbyId(Long brandId) {
+    return brandRepository.findById(brandId).orElseThrow(() -> new ResourceNotFoundException("Brand not found"));
+  }
+
   public BrandDTO create(BrandDTO dto) {
     Brand created = new Brand();
     created.setBrandName(dto.getBrandName());

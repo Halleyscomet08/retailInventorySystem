@@ -19,6 +19,7 @@ import com.inventoryProject.models.Brand;
 import com.inventoryProject.models.Product;
 import com.inventoryProject.repositories.BrandRepository;
 import com.inventoryProject.repositories.ProductRepository;
+import com.inventoryProject.services.BrandService;
 import com.inventoryProject.services.ProductService;
 
 /**
@@ -31,7 +32,7 @@ public class ProductServiceTest {
   ProductRepository productRepository;
 
   @Mock
-  BrandRepository brandRepository;
+  BrandService brandService;
 
   @InjectMocks
   ProductService productService;
@@ -79,7 +80,7 @@ public class ProductServiceTest {
     product.setCategory("Outerwear");
 
     when(productRepository.save(any(Product.class))).thenReturn(product);
-    when(brandRepository.findById(1L)).thenReturn(Optional.of(brand));
+    when(brandService.findBrandbyId(1L)).thenReturn(brand);
 
     ProductResponseDTO response = productService.create(productRequest);
 
@@ -120,7 +121,7 @@ public class ProductServiceTest {
 
     when(productRepository.save(any(Product.class))).thenReturn(newProduct);
     when(productRepository.findById(1L)).thenReturn(Optional.of(initialProduct));
-    when(brandRepository.findById(2L)).thenReturn(Optional.of(newBrand));
+    when(brandService.findBrandbyId(2L)).thenReturn(newBrand);
 
     ProductResponseDTO response = productService.update(productId, input);
 
