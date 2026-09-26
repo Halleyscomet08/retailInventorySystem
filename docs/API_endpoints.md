@@ -16,8 +16,6 @@ Returns a brandDTO object:
 200 OK - returns the brand object
 404 ResourceNotFound - Brand with given ID does not exist.
 
-although this is dto: may need to pass things like the id lmfao fuck if i know
-
 ### POST: "/brand"
 
 Creates a new brand. Receives the following JSON:
