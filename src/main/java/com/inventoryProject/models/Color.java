@@ -19,8 +19,7 @@ public class Color {
   @Column(nullable = false)
   private String colorLabel;
 
-  public Color(String colorLabel) {
-    this.colorLabel = colorLabel;
+  public Color() {
   }
 
   public Long getColorId() {
