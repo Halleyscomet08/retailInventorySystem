@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -44,6 +45,11 @@ public class BrandController {
   public ResponseEntity<Brand> create(@Valid @RequestBody BrandDTO dto) {
     return ResponseEntity.ok(brandService.create(dto));
 
+  }
+
+  @PutMapping("/{brandId}")
+  public ResponseEntity<Brand> update(@PathVariable Long brandId, @RequestBody BrandDTO dto) {
+    return ResponseEntity.ok(brandService.update(brandId, dto));
   }
 
   @PatchMapping("/{brandId}/archive")
