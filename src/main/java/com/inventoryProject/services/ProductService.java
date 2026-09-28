@@ -2,11 +2,15 @@ package com.inventoryProject.services;
 
 import org.springframework.stereotype.Service;
 
+import com.inventoryProject.dto.ProductResponseDTO;
 import com.inventoryProject.dto.Productdto;
+import com.inventoryProject.exception.ResourceNotFoundException;
 import com.inventoryProject.models.Brand;
 import com.inventoryProject.models.Product;
-import com.inventoryProject.repositories.BrandRepository;
+import com.inventoryProject.models.EntityMode;
 import com.inventoryProject.repositories.ProductRepository;
+
+import jakarta.transaction.Transactional;
 
 import java.util.List;
 
@@ -17,44 +21,86 @@ import java.util.List;
 public class ProductService {
 
   private final ProductRepository productRepository;
-  private final BrandRepository brandRepository;
+  private final BrandService brandService;
 
-  public ProductService(ProductRepository productRepository, BrandRepository brandRepository) {
+  public ProductService(ProductRepository productRepository, BrandService brandService) {
     this.productRepository = productRepository;
-    this.brandRepository = brandRepository;
+    this.brandService = brandService;
   }
 
-  public List<Product> findAll() {
-    return productRepository.findAll();
+  public List<ProductResponseDTO> findAll() {
+    List<Product> products = productRepository
+        .findAllByStatus(EntityMode.ACTIVE);
+    return products.stream().map(this::toResponseDTO).toList();
   }
 
-  public Productdto create(Productdto dto) {
+  public ProductResponseDTO create(Productdto dto) {
     Product product = new Product();
-    Brand brand = brandRepository.findById(dto.getBrand())
-        .orElseThrow(() -> new RuntimeException("Brand not found"));
+
+    Brand brand = brandService.findBrandbyId(dto.getBrand());
 
     product.setBrand(brand);
     product.setproductName(dto.getProductName());
     product.setCategory(dto.getCategory());
 
-    return toDTO(productRepository.save(product));
+    return toResponseDTO(productRepository.save(product));
   }
 
-  public Productdto get(Long productId) {
+  public ProductResponseDTO get(Long productId) {
     Product product = productRepository.findById(productId)
-        .orElseThrow(() -> new RuntimeException("Product not found"));
+        .orElseThrow(() -> new ResourceNotFoundException("Product not found"));
 
-    return toDTO(product);
+    return toResponseDTO(product);
   }
 
-  private Productdto toDTO(Product product) {
+  public List<ProductResponseDTO> getByBrand(Long brandId) {
 
-    Productdto dto = new Productdto();
+    List<Product> products = productRepository.findByBrand_BrandId(brandId);
+    return products.stream().map(this::toResponseDTO).toList();
 
-    dto.setBrand(product.getBrand().getBrandID());
+  }
+
+  @Transactional(rollbackOn = Exception.class)
+  public ProductResponseDTO update(Long productId, Productdto dto) {
+    Product product = productRepository.findById(productId)
+        .orElseThrow(() -> new ResourceNotFoundException("Product not Found"));
+
+    Brand brand = brandService.findBrandbyId(dto.getBrand());
+
+    product.setBrand(brand);
+    product.setproductName(dto.getProductName());
+    product.setCategory(dto.getCategory());
+
+    Product updated = productRepository.save(product);
+
+    return toResponseDTO(updated);
+  }
+
+  @Transactional(rollbackOn = Exception.class)
+  public void archiveProduct(Long productID) {
+    Product product = productRepository.findById(productID)
+        .orElseThrow(() -> new ResourceNotFoundException("Product Not Found"));
+    // in the future once the variants table is setup, query for variants
+    // where productID = product.getproductId(), foreach(variant ->
+    // variant.setdeletedAt(current_date))
+    // For now,
+    product.setStatus(EntityMode.ARCHIVED);
+
+    productRepository.save(product);
+  }
+
+  private ProductResponseDTO toResponseDTO(Product product) {
+
+    ProductResponseDTO dto = new ProductResponseDTO();
+
+    dto.setProductId(product.getproductId());
+    dto.setBrandId(product.getBrand().getBrandID());
+    dto.setBrandName(product.getBrand().getBrandName());
     dto.setProductName(product.getproductName());
     dto.setCategory(product.getCategory());
 
     return dto;
+
   }
+
 }

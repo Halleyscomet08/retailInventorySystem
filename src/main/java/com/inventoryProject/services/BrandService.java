@@ -4,7 +4,12 @@ import org.springframework.stereotype.Service;
 
 import com.inventoryProject.dto.BrandDTO;
 import com.inventoryProject.models.Brand;
+import com.inventoryProject.exception.ResourceNotFoundException;
+import com.inventoryProject.models.EntityMode;
 import com.inventoryProject.repositories.BrandRepository;
+
+import java.util.List;
+import jakarta.transaction.Transactional;
 
 /**
  * BrandService
@@ -18,28 +23,55 @@ public class BrandService {
     this.brandRepository = brandRepository;
   }
 
-  public BrandDTO get(Long brandId) {
-    return toDTO(brandRepository.findById(brandId)
-        .orElseThrow(() -> new RuntimeException("Brand not found")));
+  public List<Brand> getAll() {
+    List<Brand> products = brandRepository
+        .findAllByStatus(EntityMode.ACTIVE);
+    return products;
+
   }
 
-  public BrandDTO create(BrandDTO dto) {
+  public Brand get(Long brandId) {
+    return brandRepository.findById(brandId)
+        .orElseThrow(() -> new ResourceNotFoundException("Brand not found"));
+  }
+
+  public Brand findBrandbyId(Long brandId) {
+    return brandRepository.findById(brandId).orElseThrow(() -> new ResourceNotFoundException("Brand not found"));
+  }
+
+  public Brand create(BrandDTO dto) {
     Brand created = new Brand();
     created.setBrandName(dto.getBrandName());
 
     Brand saved = brandRepository.save(created);
 
-    return toDTO(saved);
+    return saved;
 
   }
 
-  private BrandDTO toDTO(Brand brand) {
-    BrandDTO dto = new BrandDTO();
+  @Transactional(rollbackOn = Exception.class)
+  public Brand update(Long brandId, BrandDTO dto) {
+    Brand brand = brandRepository.findById(brandId)
+        .orElseThrow(() -> new ResourceNotFoundException("Brand not Found"));
 
-    dto.setBrandName(brand.getBrandName());
+    brand.setBrandName(dto.getBrandName());
 
-    return dto;
+    Brand updated = brandRepository.save(brand);
 
+    return updated;
+  }
+
+  @Transactional(rollbackOn = Exception.class)
+  public void archiveBrand(Long brandId) {
+    Brand brand = brandRepository.findById(brandId)
+        .orElseThrow(() -> new ResourceNotFoundException("Product Not Found"));
+    // in the future once the variants table is setup, query for variants
+    // where productID = product.getproductId(), foreach(variant ->
+    // variant.setdeletedAt(current_date))
+    // For now,
+    brand.setStatus(EntityMode.ARCHIVED);
+
+    brandRepository.save(brand);
   }
 
 }
