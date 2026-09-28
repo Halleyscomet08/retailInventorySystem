@@ -10,7 +10,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.inventoryProject.dto.BrandDTO;
+import com.inventoryProject.models.Brand;
 import com.inventoryProject.services.BrandService;
+
+import java.util.List;
 
 import jakarta.validation.Valid;
 
@@ -27,13 +30,18 @@ public class BrandController {
     this.brandService = brandService;
   }
 
+  @GetMapping
+  public ResponseEntity<List<Brand>> getAll() {
+    return ResponseEntity.ok(brandService.getAll());
+  }
+
   @GetMapping("/{brandId}")
-  public ResponseEntity<BrandDTO> get(@PathVariable Long brandId) {
+  public ResponseEntity<Brand> get(@PathVariable Long brandId) {
     return ResponseEntity.ok(brandService.get(brandId));
   }
 
   @PostMapping()
-  public ResponseEntity<BrandDTO> create(@Valid @RequestBody BrandDTO dto) {
+  public ResponseEntity<Brand> create(@Valid @RequestBody BrandDTO dto) {
     return ResponseEntity.ok(brandService.create(dto));
 
   }

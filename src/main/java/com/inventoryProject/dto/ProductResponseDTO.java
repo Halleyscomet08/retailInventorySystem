@@ -7,6 +7,8 @@ public class ProductResponseDTO {
 
   private Long productId;
 
+  private Long brandId;
+
   private String brandName;
 
   private String productName;
@@ -43,6 +45,14 @@ public class ProductResponseDTO {
 
   public void setCategory(String category) {
     this.category = category;
+  }
+
+  public Long getBrandId() {
+    return brandId;
+  }
+
+  public void setBrandId(Long brandId) {
+    this.brandId = brandId;
   }
 
 }

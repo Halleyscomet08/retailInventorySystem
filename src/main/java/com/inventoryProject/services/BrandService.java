@@ -3,11 +3,12 @@ package com.inventoryProject.services;
 import org.springframework.stereotype.Service;
 
 import com.inventoryProject.dto.BrandDTO;
-import com.inventoryProject.exception.ResourceNotFoundException;
 import com.inventoryProject.models.Brand;
+import com.inventoryProject.exception.ResourceNotFoundException;
 import com.inventoryProject.models.EntityMode;
 import com.inventoryProject.repositories.BrandRepository;
 
+import java.util.List;
 import jakarta.transaction.Transactional;
 
 /**
@@ -22,22 +23,29 @@ public class BrandService {
     this.brandRepository = brandRepository;
   }
 
-  public BrandDTO get(Long brandId) {
-    return toDTO(brandRepository.findById(brandId)
-        .orElseThrow(() -> new ResourceNotFoundException("Brand not found")));
+  public List<Brand> getAll() {
+    List<Brand> products = brandRepository
+        .findAllByStatus(EntityMode.ACTIVE);
+    return products;
+
+  }
+
+  public Brand get(Long brandId) {
+    return brandRepository.findById(brandId)
+        .orElseThrow(() -> new ResourceNotFoundException("Brand not found"));
   }
 
   public Brand findBrandbyId(Long brandId) {
     return brandRepository.findById(brandId).orElseThrow(() -> new ResourceNotFoundException("Brand not found"));
   }
 
-  public BrandDTO create(BrandDTO dto) {
+  public Brand create(BrandDTO dto) {
     Brand created = new Brand();
     created.setBrandName(dto.getBrandName());
 
     Brand saved = brandRepository.save(created);
 
-    return toDTO(saved);
+    return saved;
 
   }
 
@@ -52,15 +60,6 @@ public class BrandService {
     brand.setStatus(EntityMode.ARCHIVED);
 
     brandRepository.save(brand);
-  }
-
-  private BrandDTO toDTO(Brand brand) {
-    BrandDTO dto = new BrandDTO();
-
-    dto.setBrandName(brand.getBrandName());
-
-    return dto;
-
   }
 
 }
