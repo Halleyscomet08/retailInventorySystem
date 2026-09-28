@@ -50,6 +50,18 @@ public class BrandService {
   }
 
   @Transactional(rollbackOn = Exception.class)
+  public Brand update(Long brandId, BrandDTO dto) {
+    Brand brand = brandRepository.findById(brandId)
+        .orElseThrow(() -> new ResourceNotFoundException("Brand not Found"));
+
+    brand.setBrandName(dto.getBrandName());
+
+    Brand updated = brandRepository.save(brand);
+
+    return updated;
+  }
+
+  @Transactional(rollbackOn = Exception.class)
   public void archiveBrand(Long brandId) {
     Brand brand = brandRepository.findById(brandId)
         .orElseThrow(() -> new ResourceNotFoundException("Product Not Found"));
