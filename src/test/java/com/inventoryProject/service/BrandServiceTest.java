@@ -38,7 +38,7 @@ public class BrandServiceTest {
 
     when(brandRepository.findById(1L)).thenReturn(Optional.of(brand));
 
-    BrandDTO result = brandService.get(1L);
+    Brand result = brandService.get(1L);
 
     assertEquals("Blueshop", result.getBrandName());
 
@@ -56,7 +56,7 @@ public class BrandServiceTest {
 
     when(brandRepository.save(any(Brand.class))).thenReturn(brandRepoSave);
 
-    BrandDTO result = brandService.create(brand);
+    Brand result = brandService.create(brand);
 
     assertEquals("Blueshop", result.getBrandName());
 

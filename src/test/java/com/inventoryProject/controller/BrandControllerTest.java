@@ -2,6 +2,7 @@ package com.inventoryProject.controller;
 
 import com.inventoryProject.controllers.BrandController;
 import com.inventoryProject.dto.BrandDTO;
+import com.inventoryProject.models.Brand;
 import com.inventoryProject.services.BrandService;
 
 import org.junit.jupiter.api.Test;
@@ -30,7 +31,9 @@ public class BrandControllerTest {
 
   @Test
   void getBrand_givenID() throws Exception {
-    BrandDTO brand = new BrandDTO();
+    Brand brand = new Brand();
+    brand.setBrandID(1L);
+
     brand.setBrandName("Blueshop");
     when(brandService.get(1L)).thenReturn(brand);
 
