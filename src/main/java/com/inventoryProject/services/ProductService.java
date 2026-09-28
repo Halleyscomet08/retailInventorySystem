@@ -94,6 +94,7 @@ public class ProductService {
     ProductResponseDTO dto = new ProductResponseDTO();
 
     dto.setProductId(product.getproductId());
+    dto.setBrandId(product.getBrand().getBrandID());
     dto.setBrandName(product.getBrand().getBrandName());
     dto.setProductName(product.getproductName());
     dto.setCategory(product.getCategory());
