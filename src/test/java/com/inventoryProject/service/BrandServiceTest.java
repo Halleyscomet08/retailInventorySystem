@@ -1,6 +1,7 @@
 package com.inventoryProject.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.util.Optional;
 
@@ -60,6 +61,29 @@ public class BrandServiceTest {
 
     assertEquals("Blueshop", result.getBrandName());
 
+  }
+
+  @Test
+  void updateBrand_whenGivenDTO() {
+
+    Brand initialBrand = new Brand();
+    initialBrand.setBrandID(1L);
+    initialBrand.setBrandName("Blueshop");
+
+    BrandDTO newBrand = new BrandDTO();
+    newBrand.setBrandName("Well-off");
+
+    Brand finalBrand = new Brand();
+    finalBrand.setBrandID(1L);
+    finalBrand.setBrandName("Well-off");
+
+    when(brandRepository.findById(1L)).thenReturn(Optional.of(initialBrand));
+    when(brandRepository.save(any(Brand.class))).thenReturn(finalBrand);
+
+    Brand response = brandService.update(1L, newBrand);
+
+    assertNotNull(response.getBrandID());
+    assertEquals("Well-off", response.getBrandName());
   }
 
 }
