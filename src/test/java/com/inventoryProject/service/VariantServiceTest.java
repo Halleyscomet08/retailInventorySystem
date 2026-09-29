@@ -23,7 +23,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import com.inventoryProject.dto.ProductResponseDTO;
 import com.inventoryProject.dto.VariantRequestDTO;
 import com.inventoryProject.exception.ExceptionMessages;
 import com.inventoryProject.exception.FieldsNotValidException;

@@ -1,6 +1,8 @@
 package com.inventoryProject.models;
 
 import java.math.BigDecimal;
+import java.sql.Date;
+import java.time.LocalDate;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -34,6 +36,17 @@ public class ProductVariant {
 
   @Column(nullable = false, precision = 10, scale = 2)
   private BigDecimal price;
+
+  @Column
+  private LocalDate archivedAt;
+
+  public LocalDate getArchivedAt() {
+    return archivedAt;
+  }
+
+  public void setArchivedAt(LocalDate archivedAt) {
+    this.archivedAt = archivedAt;
+  }
 
   public ProductVariant() {
   }

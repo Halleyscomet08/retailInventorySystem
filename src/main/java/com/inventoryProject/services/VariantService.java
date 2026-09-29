@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import com.inventoryProject.controllers.ProductController;
 import com.inventoryProject.dto.VariantRequestDTO;
 import com.inventoryProject.exception.FieldsNotValidException;
 import com.inventoryProject.models.Color;
@@ -42,6 +41,22 @@ public class VariantService {
     return null;
   }
 
+  public List<ProductVariant> findAll() {
+    return null;
+  }
+
+  public ProductVariant update(Long variantId, VariantRequestDTO variant) {
+    return null;
+  }
+
+  public void archive(Long variantId) {
+  }
+
+  public void archiveByProduct(Product product) {
+    variantRepository.archiveByProductId(product);
+
+  }
+
   public ProductVariant create(VariantRequestDTO variant) {
 
     Set<ConstraintViolation<VariantRequestDTO>> violations = validator.validate(variant);
@@ -57,7 +72,6 @@ public class VariantService {
       throw new FieldsNotValidException("Fields not valid", messages);
 
     }
-    ;
     Product product = productService.findByProductId(variant.getProductId());
     Color color = colorService.find(variant.getColorId());
     Size size = sizeService.find(variant.getSizeId());
