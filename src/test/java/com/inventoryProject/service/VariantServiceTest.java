@@ -6,7 +6,9 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoInteractions;
 
 import java.lang.reflect.Field;
 import java.math.BigDecimal;
@@ -35,6 +37,10 @@ import com.inventoryProject.services.ColorService;
 import com.inventoryProject.services.ProductService;
 import com.inventoryProject.services.SizeService;
 import com.inventoryProject.services.VariantService;
+import com.inventoryProject.validation.RequestValidator;
+
+import jakarta.validation.Validation;
+import jakarta.validation.Validator;
 
 /**
  * VariantServiceTest
@@ -53,6 +59,9 @@ public class VariantServiceTest {
 
   @Mock
   SizeService sizeService;
+
+  @Mock
+  RequestValidator requestValidator;
 
   @InjectMocks
   VariantService variantService;
@@ -126,27 +135,19 @@ public class VariantServiceTest {
 
   @Test
   void create_missingValues_throwsException() {
+    // wrong file, move to new
+    //
+    // need to trigger the request validator function
+    //
 
     VariantRequestDTO badRequest = new VariantRequestDTO();
 
-    Integer parameterCount = badRequest.getClass().getDeclaredFields().length;
-    Field[] fields = badRequest.getClass().getDeclaredFields();
+    doThrow(FieldsNotValidException.class).when(requestValidator).validateRequest(any());
 
     FieldsNotValidException exception = assertThrows(FieldsNotValidException.class, () -> {
       variantService.create(badRequest);
     });
-
-    List<String> assertedExceptions = new ArrayList<String>();
-
-    for (int i = 0; i < parameterCount; i++) {
-      assertedExceptions.add(fields[i].getName() + ": " + ExceptionMessages.LABEL_REQUIRED);
-    }
-    ;
-
-    Set<String> assertString = new HashSet<String>(assertedExceptions);
-    Set<String> assertResponse = new HashSet<String>(exception.getErrorMessages());
-
-    assertEquals(assertString, assertResponse);
+    verifyNoInteractions(variantRepository);
 
   }
 
