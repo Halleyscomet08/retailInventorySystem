@@ -9,7 +9,6 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.only;
 import static org.mockito.Mockito.verify;
 
 import org.junit.jupiter.api.Test;
@@ -20,12 +19,10 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import com.inventoryProject.exception.ExceptionMessages;
 import com.inventoryProject.exception.ResourceNotFoundException;
 import com.inventoryProject.models.Size;
-import com.inventoryProject.models.Size;
 import com.inventoryProject.repositories.SizeRepository;
-import com.inventoryProject.repositories.SizeRepository;
-import com.inventoryProject.services.SizeService;
 import com.inventoryProject.services.SizeService;
 
 /**
@@ -72,7 +69,7 @@ public class SizeServiceTest {
     IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
       sizeService.create(label);
     });
-    assertEquals("Label field must not be null or blank", exception.getMessage());
+    assertEquals(ExceptionMessages.LABEL_REQUIRED, exception.getMessage());
 
   }
 
@@ -83,7 +80,7 @@ public class SizeServiceTest {
     IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
       sizeService.create(label);
     });
-    assertEquals("Label field must not be null or blank", exception.getMessage());
+    assertEquals(ExceptionMessages.LABEL_REQUIRED, exception.getMessage());
 
   }
 
@@ -112,7 +109,7 @@ public class SizeServiceTest {
     ResourceNotFoundException exception = assertThrows(ResourceNotFoundException.class, () -> {
       sizeService.find(query);
     });
-    assertEquals("Requested Size does not exist", exception.getMessage());
+    assertEquals(ExceptionMessages.SIZE_NOT_FOUND, exception.getMessage());
 
   }
 

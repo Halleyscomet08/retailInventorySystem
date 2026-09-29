@@ -1,5 +1,6 @@
 package com.inventoryProject.services;
 
+import com.inventoryProject.exception.ExceptionMessages;
 import com.inventoryProject.exception.ResourceNotFoundException;
 import com.inventoryProject.models.Size;
 import com.inventoryProject.repositories.SizeRepository;
@@ -19,7 +20,7 @@ public class SizeService {
 
     if (label == null || label.trim().isEmpty()) {
 
-      throw new IllegalArgumentException("Label field must not be null or blank");
+      throw new IllegalArgumentException(ExceptionMessages.LABEL_REQUIRED);
 
     }
     Size input = new Size();
@@ -33,7 +34,7 @@ public class SizeService {
   public Size find(Long sizeId) {
     Size response = sizeRepository.findById(sizeId)
         .orElseThrow(() -> {
-          throw new ResourceNotFoundException("Requested Size does not exist");
+          throw new ResourceNotFoundException(ExceptionMessages.SIZE_NOT_FOUND);
         });
     return response;
   }

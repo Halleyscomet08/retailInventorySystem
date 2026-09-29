@@ -20,6 +20,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import com.inventoryProject.exception.ExceptionMessages;
 import com.inventoryProject.exception.ResourceNotFoundException;
 import com.inventoryProject.models.Color;
 import com.inventoryProject.repositories.ColorRepository;
@@ -80,7 +81,7 @@ public class ColorServiceTest {
     IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
       colorService.create(label);
     });
-    assertEquals("Label field must not be null or blank", exception.getMessage());
+    assertEquals(ExceptionMessages.LABEL_REQUIRED, exception.getMessage());
 
   }
 
@@ -109,7 +110,7 @@ public class ColorServiceTest {
     ResourceNotFoundException exception = assertThrows(ResourceNotFoundException.class, () -> {
       colorService.find(query);
     });
-    assertEquals("Requested Color does not exist", exception.getMessage());
+    assertEquals(ExceptionMessages.COLOR_NOT_FOUND, exception.getMessage());
 
   }
 

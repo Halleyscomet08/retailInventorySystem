@@ -1,5 +1,6 @@
 package com.inventoryProject.services;
 
+import com.inventoryProject.exception.ExceptionMessages;
 import com.inventoryProject.exception.ResourceNotFoundException;
 import com.inventoryProject.models.Color;
 import com.inventoryProject.repositories.ColorRepository;
@@ -19,7 +20,7 @@ public class ColorService {
 
     if (label == null || label.trim().isEmpty()) {
 
-      throw new IllegalArgumentException("Label field must not be null or blank");
+      throw new IllegalArgumentException(ExceptionMessages.LABEL_REQUIRED);
 
     }
     Color input = new Color();
@@ -33,7 +34,7 @@ public class ColorService {
   public Color find(Long colorId) {
     Color response = colorRepository.findById(colorId)
         .orElseThrow(() -> {
-          throw new ResourceNotFoundException("Requested Color does not exist");
+          throw new ResourceNotFoundException(ExceptionMessages.COLOR_NOT_FOUND);
         });
     return response;
   }

@@ -60,6 +60,11 @@ public class ProductService {
 
   }
 
+  public Product findByProductId(Long productId) {
+    return productRepository.findById(productId)
+        .orElseThrow(() -> new ResourceNotFoundException("Product Not Found"));
+  }
+
   @Transactional(rollbackOn = Exception.class)
   public ProductResponseDTO update(Long productId, Productdto dto) {
     Product product = productRepository.findById(productId)
