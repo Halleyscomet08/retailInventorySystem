@@ -10,12 +10,7 @@ import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoInteractions;
 
-import java.lang.reflect.Field;
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -26,7 +21,6 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.inventoryProject.dto.VariantRequestDTO;
-import com.inventoryProject.exception.ExceptionMessages;
 import com.inventoryProject.exception.FieldsNotValidException;
 import com.inventoryProject.models.Color;
 import com.inventoryProject.models.Product;
@@ -38,9 +32,6 @@ import com.inventoryProject.services.ProductService;
 import com.inventoryProject.services.SizeService;
 import com.inventoryProject.services.VariantService;
 import com.inventoryProject.validation.RequestValidator;
-
-import jakarta.validation.Validation;
-import jakarta.validation.Validator;
 
 /**
  * VariantServiceTest
