@@ -4,7 +4,6 @@ import java.math.BigDecimal;
 
 import com.inventoryProject.exception.ExceptionMessages;
 
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 /**
