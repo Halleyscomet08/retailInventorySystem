@@ -135,7 +135,7 @@ public class VariantServiceTest {
 
     doThrow(FieldsNotValidException.class).when(requestValidator).validateRequest(any());
 
-    FieldsNotValidException exception = assertThrows(FieldsNotValidException.class, () -> {
+    assertThrows(FieldsNotValidException.class, () -> {
       variantService.create(badRequest);
     });
     verifyNoInteractions(variantRepository);
