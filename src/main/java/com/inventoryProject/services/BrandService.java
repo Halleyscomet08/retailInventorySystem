@@ -25,7 +25,7 @@ public class BrandService {
 
   public List<Brand> getAll() {
     List<Brand> products = brandRepository
-        .findAllByStatus(EntityMode.ACTIVE);
+        .findBrandByStatus(EntityMode.ACTIVE);
     return products;
 
   }

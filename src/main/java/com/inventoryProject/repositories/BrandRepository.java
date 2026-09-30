@@ -13,6 +13,5 @@ import com.inventoryProject.models.EntityMode;
  */
 public interface BrandRepository extends JpaRepository<Brand, Long> {
 
-  @Query("SELECT b FROM Brand b WHERE b.status = :status")
-  public List<Brand> findAllByStatus(@Param("status") EntityMode status);
+  public List<Brand> findBrandByStatus(@Param("status") EntityMode status);
 }
