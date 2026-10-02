@@ -2,15 +2,23 @@ package com.inventoryProject.models;
 
 import java.io.Serializable;
 
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+
 /**
  * InventoryId
  */
 public class InventoryId implements Serializable {
 
-  private Long storeId;
-  private Long variantId;
+  @ManyToOne
+  @JoinColumn(name = "store_id")
+  private Store storeId;
 
-  public InventoryId(Long storeId, Long variantId) {
+  @ManyToOne
+  @JoinColumn(name = "variant_id")
+  private ProductVariant variantId;
+
+  public InventoryId(Store storeId, ProductVariant variantId) {
     this.storeId = storeId;
     this.variantId = variantId;
   }

@@ -3,6 +3,7 @@ package com.inventoryProject.models;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.IdClass;
+import jakarta.validation.constraints.PositiveOrZero;
 
 /**
  * Inventory
@@ -12,30 +13,47 @@ import jakarta.persistence.IdClass;
 public class Inventory {
 
   @Id
-  private Long storeId;
+  private Store storeId;
 
   @Id
-  private Long variantId;
+  private ProductVariant variantId;
 
-  public Inventory(Long storeId, Long variantId) {
-    this.storeId = storeId;
-    this.variantId = variantId;
+  @PositiveOrZero
+  private Integer count;
+
+  public void addInventory(int change) {
+    count += change;
   }
 
-  public Long getStoreId() {
+  public void subtractInventory(int change) {
+    count -= change;
+  }
+
+  public Inventory() {
+  }
+
+  public Store getStoreId() {
     return storeId;
   }
 
-  public void setStoreId(Long storeId) {
+  public void setStoreId(Store storeId) {
     this.storeId = storeId;
   }
 
-  public Long getVariantId() {
+  public ProductVariant getVariantId() {
     return variantId;
   }
 
-  public void setVariantId(Long variantId) {
+  public void setVariantId(ProductVariant variantId) {
     this.variantId = variantId;
+  }
+
+  public void setCount(Integer count) {
+    this.count = count;
+  }
+
+  public Integer getCount() {
+    return count;
   }
 
 }
