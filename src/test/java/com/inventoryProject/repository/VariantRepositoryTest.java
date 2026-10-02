@@ -6,10 +6,12 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 
 import com.inventoryProject.exception.ResourceNotFoundException;
 import com.inventoryProject.models.Brand;
@@ -23,12 +25,12 @@ import com.inventoryProject.repositories.ProductRepository;
 import com.inventoryProject.repositories.ProductVariantRepository;
 import com.inventoryProject.repositories.SizeRepository;
 
+import jakarta.transaction.Transactional;
+
 /**
  * VariantRepositoryTest
  */
 @DataJpaTest(properties = {
-    "spring.datasource.url=jdbc:h2:mem:testdb",
-    "spring.jpa.hibernate.ddl-auto=create-drop"
 })
 public class VariantRepositoryTest {
 
@@ -42,6 +44,8 @@ public class VariantRepositoryTest {
   ColorRepository colorRepository;
   @Autowired
   SizeRepository sizeRepository;
+  @Autowired
+  TestEntityManager testEntityManager;
 
   private Brand savedbrand1;
   private Brand savedbrand2;
@@ -89,6 +93,10 @@ public class VariantRepositoryTest {
 
     savedVariant1 = productVariantRepository.save(variant1);
     savedVariant2 = productVariantRepository.save(variant2);
+
+    testEntityManager.flush();
+    testEntityManager.clear();
+
   }
 
   @Test
@@ -104,4 +112,17 @@ public class VariantRepositoryTest {
     assertNull(finalVariant2.getArchivedAt());
   }
 
+  @Transactional
+  @AfterEach
+  public void tearDown() {
+    productVariantRepository.delete(savedVariant1);
+    productVariantRepository.delete(savedVariant2);
+    productRepository.delete(savedProduct1);
+    productRepository.delete(savedProduct2);
+    brandRepository.delete(savedbrand1);
+    brandRepository.delete(savedbrand2);
+    testEntityManager.flush();
+    testEntityManager.clear();
+    System.out.println(brandRepository.count());
+  }
 }
