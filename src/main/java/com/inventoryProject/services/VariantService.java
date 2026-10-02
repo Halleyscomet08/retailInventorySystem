@@ -47,7 +47,6 @@ public class VariantService {
 
   public void archiveByProduct(Product product) {
     variantRepository.archiveByProductId(product);
-
   }
 
   public ProductVariant create(VariantRequestDTO variant) {

@@ -9,6 +9,7 @@ import com.inventoryProject.models.Brand;
 import com.inventoryProject.models.Product;
 import com.inventoryProject.models.EntityMode;
 import com.inventoryProject.repositories.ProductRepository;
+import com.inventoryProject.validation.RequestValidator;
 
 import jakarta.transaction.Transactional;
 
@@ -22,19 +23,25 @@ public class ProductService {
 
   private final ProductRepository productRepository;
   private final BrandService brandService;
+  private final RequestValidator requestValidator;
 
-  public ProductService(ProductRepository productRepository, BrandService brandService) {
+  public ProductService(ProductRepository productRepository, BrandService brandService,
+      RequestValidator requestValidator) {
     this.productRepository = productRepository;
     this.brandService = brandService;
+    this.requestValidator = requestValidator;
   }
 
   public List<ProductResponseDTO> findAll() {
     List<Product> products = productRepository
-        .findAllByStatus(EntityMode.ACTIVE);
+        .findProductByStatus(EntityMode.ACTIVE);
     return products.stream().map(this::toResponseDTO).toList();
   }
 
   public ProductResponseDTO create(Productdto dto) {
+
+    requestValidator.validateRequest(dto);
+
     Product product = new Product();
 
     Brand brand = brandService.findBrandbyId(dto.getBrand());

@@ -13,6 +13,9 @@ import jakarta.validation.Validator;
 
 /**
  * RequestValidator
+ *
+ * This acts as a wrapper for a validator, that essentially tracks
+ * violations done by an input. Use this to throw validation exceptions early.
  */
 @Component
 public class RequestValidator {

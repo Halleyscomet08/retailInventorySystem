@@ -2,6 +2,7 @@ package com.inventoryProject.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.Optional;
 
@@ -9,14 +10,19 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import static org.mockito.Mockito.when;
 import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.doThrow;
+import static org.mockito.Mockito.verifyNoInteractions;
+
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.inventoryProject.dto.BrandDTO;
+import com.inventoryProject.exception.FieldsNotValidException;
 import com.inventoryProject.models.Brand;
 import com.inventoryProject.repositories.BrandRepository;
 import com.inventoryProject.services.BrandService;
+import com.inventoryProject.validation.RequestValidator;
 
 /**
  * BrandServiceTest
@@ -26,6 +32,9 @@ public class BrandServiceTest {
 
   @Mock
   BrandRepository brandRepository;
+
+  @Mock
+  RequestValidator requestValidator;
 
   @InjectMocks
   BrandService brandService;
@@ -61,6 +70,18 @@ public class BrandServiceTest {
 
     assertEquals("Blueshop", result.getBrandName());
 
+  }
+
+  @Test
+  void create_givenBlank_throwException() {
+    BrandDTO badRequest = new BrandDTO();
+
+    doThrow(FieldsNotValidException.class).when(requestValidator).validateRequest(any());
+
+    assertThrows(FieldsNotValidException.class, () -> {
+      brandService.create(badRequest);
+    });
+    verifyNoInteractions(brandRepository);
   }
 
   @Test

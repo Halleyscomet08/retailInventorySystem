@@ -7,6 +7,7 @@ import com.inventoryProject.models.Brand;
 import com.inventoryProject.exception.ResourceNotFoundException;
 import com.inventoryProject.models.EntityMode;
 import com.inventoryProject.repositories.BrandRepository;
+import com.inventoryProject.validation.RequestValidator;
 
 import java.util.List;
 import jakarta.transaction.Transactional;
@@ -18,9 +19,11 @@ import jakarta.transaction.Transactional;
 public class BrandService {
 
   private final BrandRepository brandRepository;
+  private final RequestValidator requestValidator;
 
-  public BrandService(BrandRepository brandRepository) {
+  public BrandService(BrandRepository brandRepository, RequestValidator requestValidator) {
     this.brandRepository = brandRepository;
+    this.requestValidator = requestValidator;
   }
 
   public List<Brand> getAll() {
@@ -40,6 +43,7 @@ public class BrandService {
   }
 
   public Brand create(BrandDTO dto) {
+    requestValidator.validateRequest(dto);
     Brand created = new Brand();
     created.setBrandName(dto.getBrandName());
 
