@@ -21,12 +21,8 @@ public class Inventory {
   @PositiveOrZero
   private Integer count;
 
-  public void addInventory(int change) {
+  public void changeInventory(int change) {
     count += change;
-  }
-
-  public void subtractInventory(int change) {
-    count -= change;
   }
 
   public Inventory() {

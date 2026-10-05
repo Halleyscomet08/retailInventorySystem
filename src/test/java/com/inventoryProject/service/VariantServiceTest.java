@@ -102,7 +102,6 @@ public class VariantServiceTest {
     // Act
     ProductVariant response = variantService.create(variantRequest);
     verify(variantRepository).save(variantCaptor.capture());
-
     ProductVariant captured = variantCaptor.getValue();
 
     // Assert

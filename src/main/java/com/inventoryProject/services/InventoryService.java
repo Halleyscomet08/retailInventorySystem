@@ -1,7 +1,10 @@
 package com.inventoryProject.services;
 
 import com.inventoryProject.dto.InventoryRequestDTO;
+import com.inventoryProject.exception.ExceptionMessages;
+import com.inventoryProject.exception.ResourceNotFoundException;
 import com.inventoryProject.models.Inventory;
+import com.inventoryProject.models.InventoryId;
 import com.inventoryProject.models.ProductVariant;
 import com.inventoryProject.models.Store;
 import com.inventoryProject.repositories.InventoryRepository;
@@ -27,24 +30,40 @@ public class InventoryService {
   }
 
   public Inventory create(InventoryRequestDTO inventory) {
-    // what the fuck does the input for this even look like
-    // NEW DTO TIME MOTHER FUCKERRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR
-    // Validate:
     requestValidator.validateRequest(inventory);
-    // Query Variant and Store
+
     ProductVariant variant = variantService.find(inventory.getVariantId());
     Store store = storeService.get(inventory.getVariantId());
-    // Build Inventory -- I have no idea how to do this given a serialized ID
+
     Inventory finalInventory = new Inventory();
     finalInventory.setStoreId(store);
     finalInventory.setVariantId(variant);
     finalInventory.setCount(inventory.getCount());
-    // Save Inventory
+
     Inventory response = inventoryRepository.save(finalInventory);
-    // Return Inventory
+
     return response;
   }
 
-  void editInventory(int change) {
+  /**
+   * @param change: change number
+   *
+   *                Edits the specific Inventoryid's count number.
+   *
+   *                Preconditions: InventoryId exists, change is an int
+   *                Postconditions: InventoryId's count is modified by the change
+   *                Invariants: inventroy count cannot be negative.
+   *
+   */
+  public Inventory logInventory(int change, InventoryId id) {
+    Inventory inventory = inventoryRepository.findById(id)
+        .orElseThrow(() -> new ResourceNotFoundException(ExceptionMessages.LABEL_REQUIRED));
+
+    inventory.changeInventory(change);
+    requestValidator.validateRequest(inventory);
+
+    Inventory response = inventoryRepository.save(inventory);
+    return response;
+
   }
 }
