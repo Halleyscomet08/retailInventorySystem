@@ -83,9 +83,9 @@ public class VariantServiceTest {
 
     ProductVariant variant = new ProductVariant();
     variant.setVariantId(1L);
-    variant.setProductId(product);
-    variant.setColorId(color);
-    variant.setSizeId(size);
+    variant.setProduct(product);
+    variant.setColor(color);
+    variant.setSize(size);
     variant.setPrice(BigDecimal.valueOf(100));
 
     VariantRequestDTO variantRequest = new VariantRequestDTO();
@@ -109,14 +109,14 @@ public class VariantServiceTest {
     // check if dto is assigned correctly
     assertNull(captured.getVariantId());
     assertEquals(product.getproductId(), captured.getProductId().getproductId());
-    assertEquals(color.getColorId(), captured.getColorId().getColorId());
-    assertEquals(size.getSizeId(), captured.getSizeId().getSizeId());
+    assertEquals(color.getColorId(), captured.getColor().getColorId());
+    assertEquals(size.getSizeId(), captured.getSize().getSizeId());
     assertEquals(BigDecimal.valueOf(100), captured.getPrice());
 
     // check if save is called
     assertNotNull(response.getProductId().getproductId());
-    assertNotNull(response.getColorId().getColorId());
-    assertNotNull(response.getSizeId().getSizeId());
+    assertNotNull(response.getColor().getColorId());
+    assertNotNull(response.getSize().getSizeId());
     assertNotNull(response.getPrice());
 
   }

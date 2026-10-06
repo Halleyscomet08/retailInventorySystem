@@ -38,8 +38,8 @@ public class InventoryService {
     Store store = storeService.get(inventory.getVariantId());
 
     Inventory finalInventory = new Inventory();
-    finalInventory.setStoreId(store);
-    finalInventory.setVariantId(variant);
+    finalInventory.setStore(store);
+    finalInventory.setVariant(variant);
     finalInventory.setCount(inventory.getCount());
 
     Inventory response = inventoryRepository.save(finalInventory);

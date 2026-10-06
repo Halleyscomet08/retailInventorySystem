@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.math.BigDecimal;
 import java.util.List;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,8 @@ import com.inventoryProject.repositories.ProductRepository;
 import com.inventoryProject.repositories.ProductVariantRepository;
 import com.inventoryProject.repositories.SizeRepository;
 import com.inventoryProject.repositories.StoreRepository;
+
+import jakarta.transaction.Transactional;
 
 /**
  * InventoryRepositoryTest
@@ -86,14 +89,14 @@ public class InventoryRepositoryTest {
     Size savedSize1 = sizeRepository.save(size1);
 
     ProductVariant variant1 = new ProductVariant();
-    variant1.setProductId(savedProduct1);
-    variant1.setColorId(savedColor1);
-    variant1.setSizeId(savedSize1);
+    variant1.setProduct(savedProduct1);
+    variant1.setColor(savedColor1);
+    variant1.setSize(savedSize1);
     variant1.setPrice(BigDecimal.valueOf(10));
     ProductVariant variant2 = new ProductVariant();
-    variant2.setProductId(savedProduct2);
-    variant2.setColorId(savedColor1);
-    variant2.setSizeId(savedSize1);
+    variant2.setProduct(savedProduct2);
+    variant2.setColor(savedColor1);
+    variant2.setSize(savedSize1);
     variant2.setPrice(BigDecimal.valueOf(10));
 
     savedVariant1 = productVariantRepository.save(variant1);
@@ -148,6 +151,20 @@ public class InventoryRepositoryTest {
     assertTrue(response.stream().allMatch(n -> (n.getVariantId().equals(savedVariant1.getVariantId()))));
     assertTrue(response.stream().allMatch(n -> (n.getCount() > 0)));
 
+  }
+
+  @Transactional
+  @AfterEach
+  public void tearDown() {
+    inventoryRepository.delete(savedInventory1);
+    inventoryRepository.delete(savedInventory2);
+    inventoryRepository.delete(savedInventory3);
+    inventoryRepository.delete(savedInventory4);
+    inventoryRepository.delete(savedInventory5);
+    productVariantRepository.delete(savedVariant1);
+    productVariantRepository.delete(savedVariant2);
+    testEntityManager.flush();
+    testEntityManager.clear();
   }
 
 }

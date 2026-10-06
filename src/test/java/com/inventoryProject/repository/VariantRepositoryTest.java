@@ -81,14 +81,14 @@ public class VariantRepositoryTest {
     Size savedSize1 = sizeRepository.save(size1);
 
     ProductVariant variant1 = new ProductVariant();
-    variant1.setProductId(savedProduct1);
-    variant1.setColorId(savedColor1);
-    variant1.setSizeId(savedSize1);
+    variant1.setProduct(savedProduct1);
+    variant1.setColor(savedColor1);
+    variant1.setSize(savedSize1);
     variant1.setPrice(BigDecimal.valueOf(10));
     ProductVariant variant2 = new ProductVariant();
-    variant2.setProductId(savedProduct2);
-    variant2.setColorId(savedColor1);
-    variant2.setSizeId(savedSize1);
+    variant2.setProduct(savedProduct2);
+    variant2.setColor(savedColor1);
+    variant2.setSize(savedSize1);
     variant2.setPrice(BigDecimal.valueOf(10));
 
     savedVariant1 = productVariantRepository.save(variant1);

@@ -1,7 +1,6 @@
 package com.inventoryProject.models;
 
 import java.math.BigDecimal;
-import java.sql.Date;
 import java.time.LocalDate;
 
 import jakarta.persistence.Column;
@@ -63,23 +62,23 @@ public class ProductVariant {
     return productId;
   }
 
-  public void setProductId(Product productId) {
+  public void setProduct(Product productId) {
     this.productId = productId;
   }
 
-  public Color getColorId() {
+  public Color getColor() {
     return colorId;
   }
 
-  public void setColorId(Color colorId) {
+  public void setColor(Color colorId) {
     this.colorId = colorId;
   }
 
-  public Size getSizeId() {
+  public Size getSize() {
     return sizeId;
   }
 
-  public void setSizeId(Size sizeId) {
+  public void setSize(Size sizeId) {
     this.sizeId = sizeId;
   }
 

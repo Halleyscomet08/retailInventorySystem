@@ -1,6 +1,5 @@
 package com.inventoryProject.repository;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
@@ -15,7 +14,6 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import com.inventoryProject.models.Brand;
 import com.inventoryProject.models.EntityMode;
 import com.inventoryProject.repositories.BrandRepository;
-import com.inventoryProject.services.BrandService;
 
 import jakarta.transaction.Transactional;
 

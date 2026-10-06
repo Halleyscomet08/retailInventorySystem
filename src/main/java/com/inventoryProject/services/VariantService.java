@@ -58,9 +58,9 @@ public class VariantService {
     Size size = sizeService.find(variant.getSizeId());
 
     ProductVariant variantObject = new ProductVariant();
-    variantObject.setProductId(product);
-    variantObject.setColorId(color);
-    variantObject.setSizeId(size);
+    variantObject.setProduct(product);
+    variantObject.setColor(color);
+    variantObject.setSize(size);
     variantObject.setPrice(variant.getPrice());
 
     ProductVariant response = variantRepository.save(variantObject);
