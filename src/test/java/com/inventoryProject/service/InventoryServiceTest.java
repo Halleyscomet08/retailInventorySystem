@@ -58,6 +58,51 @@ public class InventoryServiceTest {
   @Captor
   ArgumentCaptor<Inventory> inventoryCaptor;
 
+  /**
+   * 
+   * Given there exists at least one store that has stock on hand for a variant,
+   * when this variant is requested, then the API returns an List of Inventory
+   * entries,
+   * with each entry containing the store's name and on-hand quantity for the
+   * requested variant.
+   */
+  @Test
+  void getVariantStock_inventoryIdExists_returnsList() {
+    // Arrange
+    Store store1 = new Store();
+    store1.setStoreId(1L);
+    Store store2 = new Store();
+    store1.setStoreId(2L);
+    ProductVariant variant1 = new ProductVariant();
+    variant1.setVariantId(1L);
+    ProductVariant variant2 = new ProductVariant();
+    variant1.setVariantId(2L);
+    Inventory inventory1 = new Inventory();
+    inventory1.setStore(store1);
+    inventory1.setVariant(variant1);
+    inventory1.setCount(5);
+    Inventory inventory2 = new Inventory();
+    inventory2.setStore(store1);
+    inventory2.setVariant(variant1);
+    inventory2.setCount(3);
+    Inventory inventory3 = new Inventory();
+    inventory3.setStore(store2);
+    inventory3.setVariant(variant1);
+    inventory3.setCount(0);
+    Inventory inventory4 = new Inventory();
+    inventory4.setStore(store1);
+    inventory4.setVariant(variant2);
+    inventory4.setCount(5);
+    Inventory inventory5 = new Inventory();
+    inventory5.setStore(store2);
+    inventory5.setVariant(variant2);
+    inventory5.setCount(5);
+
+    // dependencies: inventoryRepository, query by ID, greater than one
+    // variantRepository, query for existing variant
+
+  }
+
   @Test
   void logInventory_negativeChange_returnsNewCount() {
     // Arrange
@@ -68,14 +113,14 @@ public class InventoryServiceTest {
     variant.setVariantId(1L);
     InventoryId id = new InventoryId(store, variant);
     Inventory inventory = new Inventory();
-    inventory.setVariantId(variant);
-    inventory.setStoreId(store);
+    inventory.setVariant(variant);
+    inventory.setStore(store);
     inventory.setCount(6);
     int change = -4;
 
     Inventory finalInventory = new Inventory();
-    finalInventory.setVariantId(variant);
-    finalInventory.setStoreId(store);
+    finalInventory.setVariant(variant);
+    finalInventory.setStore(store);
     finalInventory.setCount(2);
 
     // Act
@@ -104,14 +149,14 @@ public class InventoryServiceTest {
     variant.setVariantId(1L);
     InventoryId id = new InventoryId(store, variant);
     Inventory inventory = new Inventory();
-    inventory.setVariantId(variant);
-    inventory.setStoreId(store);
+    inventory.setVariant(variant);
+    inventory.setStore(store);
     inventory.setCount(6);
     int change = 4;
 
     Inventory finalInventory = new Inventory();
-    finalInventory.setVariantId(variant);
-    finalInventory.setStoreId(store);
+    finalInventory.setVariant(variant);
+    finalInventory.setStore(store);
     finalInventory.setCount(10);
 
     // Act
@@ -140,14 +185,14 @@ public class InventoryServiceTest {
     variant.setVariantId(1L);
     InventoryId id = new InventoryId(store, variant);
     Inventory inventory = new Inventory();
-    inventory.setVariantId(variant);
-    inventory.setStoreId(store);
+    inventory.setVariant(variant);
+    inventory.setStore(store);
     inventory.setCount(6);
     int change = -8;
 
     Inventory finalInventory = new Inventory();
-    finalInventory.setVariantId(variant);
-    finalInventory.setStoreId(store);
+    finalInventory.setVariant(variant);
+    finalInventory.setStore(store);
     finalInventory.setCount(10);
 
     when(inventoryRepository.findById(id)).thenReturn(Optional.of(inventory));
@@ -173,8 +218,8 @@ public class InventoryServiceTest {
     variant.setVariantId(1L);
 
     Inventory inventory = new Inventory();
-    inventory.setStoreId(store);
-    inventory.setVariantId(variant);
+    inventory.setStore(store);
+    inventory.setVariant(variant);
     inventory.setCount(100);
 
     InventoryRequestDTO request = new InventoryRequestDTO();
@@ -191,14 +236,14 @@ public class InventoryServiceTest {
 
     Inventory captured = inventoryCaptor.getValue();
 
-    assertEquals(variant, captured.getVariantId());
-    assertEquals(store, captured.getStoreId());
+    assertEquals(variant, captured.getVariant());
+    assertEquals(store, captured.getStore());
     assertEquals(100, captured.getCount());
 
-    assertNotNull(response.getVariantId());
-    assertNotNull(response.getStoreId());
-    assertEquals(variant, response.getVariantId());
-    assertEquals(store, response.getStoreId());
+    assertNotNull(response.getVariant());
+    assertNotNull(response.getStore());
+    assertEquals(variant, response.getVariant());
+    assertEquals(store, response.getStore());
     assertEquals(100, response.getCount());
 
   }

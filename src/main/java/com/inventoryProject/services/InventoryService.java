@@ -1,5 +1,7 @@
 package com.inventoryProject.services;
 
+import java.util.List;
+
 import com.inventoryProject.dto.InventoryRequestDTO;
 import com.inventoryProject.exception.ExceptionMessages;
 import com.inventoryProject.exception.ResourceNotFoundException;
@@ -64,6 +66,11 @@ public class InventoryService {
 
     Inventory response = inventoryRepository.save(inventory);
     return response;
+
+  }
+
+  public List<Inventory> getVariants(Long variantId, Integer boundery) {
+    return null;
 
   }
 }

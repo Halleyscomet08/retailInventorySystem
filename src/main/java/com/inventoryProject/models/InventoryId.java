@@ -18,6 +18,9 @@ public class InventoryId implements Serializable {
   @JoinColumn(name = "variant_id")
   private ProductVariant variantId;
 
+  public InventoryId() {
+  }
+
   public InventoryId(Store storeId, ProductVariant variantId) {
     this.storeId = storeId;
     this.variantId = variantId;

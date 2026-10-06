@@ -28,19 +28,19 @@ public class Inventory {
   public Inventory() {
   }
 
-  public Store getStoreId() {
+  public Store getStore() {
     return storeId;
   }
 
-  public void setStoreId(Store storeId) {
+  public void setStore(Store storeId) {
     this.storeId = storeId;
   }
 
-  public ProductVariant getVariantId() {
+  public ProductVariant getVariant() {
     return variantId;
   }
 
-  public void setVariantId(ProductVariant variantId) {
+  public void setVariant(ProductVariant variantId) {
     this.variantId = variantId;
   }
 
@@ -50,6 +50,14 @@ public class Inventory {
 
   public Integer getCount() {
     return count;
+  }
+
+  public Long getStoreId() {
+    return storeId.getStoreId();
+  }
+
+  public Long getVariantId() {
+    return variantId.getVariantId();
   }
 
 }
