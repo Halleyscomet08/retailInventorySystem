@@ -1,4 +1,7 @@
-package com.inventoryProject.models;
+package com.inventoryProject.inventory;
+
+import com.inventoryProject.models.ProductVariant;
+import com.inventoryProject.models.Store;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;

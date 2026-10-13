@@ -1,17 +1,14 @@
-package com.inventoryProject.services;
+package com.inventoryProject.inventory;
 
 import java.util.List;
-
-import org.springframework.web.bind.annotation.GetMapping;
 
 import com.inventoryProject.dto.InventoryRequestDTO;
 import com.inventoryProject.exception.ExceptionMessages;
 import com.inventoryProject.exception.ResourceNotFoundException;
-import com.inventoryProject.models.Inventory;
-import com.inventoryProject.models.InventoryId;
 import com.inventoryProject.models.ProductVariant;
 import com.inventoryProject.models.Store;
-import com.inventoryProject.repositories.InventoryRepository;
+import com.inventoryProject.services.StoreService;
+import com.inventoryProject.services.VariantService;
 import com.inventoryProject.validation.RequestValidator;
 
 /**

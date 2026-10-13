@@ -1,11 +1,9 @@
-package com.inventoryProject.repositories;
+package com.inventoryProject.inventory;
 
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.inventoryProject.models.Inventory;
-import com.inventoryProject.models.InventoryId;
 import com.inventoryProject.models.ProductVariant;
 
 /**

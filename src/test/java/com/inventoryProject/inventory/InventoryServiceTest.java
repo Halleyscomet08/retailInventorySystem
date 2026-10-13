@@ -1,19 +1,18 @@
-package com.inventoryProject.service;
-
-import static org.mockito.Mockito.when;
-
-import java.util.List;
-import java.util.Optional;
+package com.inventoryProject.inventory;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.Mockito.any;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoInteractions;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
+import static org.mockito.Mockito.when;
+
+import java.util.List;
+import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -25,12 +24,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.inventoryProject.dto.InventoryRequestDTO;
 import com.inventoryProject.exception.FieldsNotValidException;
-import com.inventoryProject.models.Inventory;
-import com.inventoryProject.models.InventoryId;
 import com.inventoryProject.models.ProductVariant;
 import com.inventoryProject.models.Store;
-import com.inventoryProject.repositories.InventoryRepository;
-import com.inventoryProject.services.InventoryService;
 import com.inventoryProject.services.StoreService;
 import com.inventoryProject.services.VariantService;
 import com.inventoryProject.validation.RequestValidator;

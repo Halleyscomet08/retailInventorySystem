@@ -1,4 +1,4 @@
-package com.inventoryProject.repository;
+package com.inventoryProject.inventory;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -13,12 +13,10 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 
 import com.inventoryProject.models.Brand;
-import com.inventoryProject.models.Inventory;
 import com.inventoryProject.models.Product;
 import com.inventoryProject.models.ProductVariant;
 import com.inventoryProject.models.Store;
 import com.inventoryProject.repositories.BrandRepository;
-import com.inventoryProject.repositories.InventoryRepository;
 import com.inventoryProject.repositories.ProductRepository;
 import com.inventoryProject.repositories.ProductVariantRepository;
 import com.inventoryProject.repositories.StoreRepository;

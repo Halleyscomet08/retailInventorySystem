@@ -1,6 +1,9 @@
-package com.inventoryProject.models;
+package com.inventoryProject.inventory;
 
 import java.io.Serializable;
+
+import com.inventoryProject.models.ProductVariant;
+import com.inventoryProject.models.Store;
 
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;

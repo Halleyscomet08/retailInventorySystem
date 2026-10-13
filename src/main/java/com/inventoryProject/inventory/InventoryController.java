@@ -1,4 +1,4 @@
-package com.inventoryProject.controllers;
+package com.inventoryProject.inventory;
 
 import java.util.List;
 
@@ -10,10 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.inventoryProject.services.InventoryService;
 import com.inventoryProject.dto.InventoryRequestDTO;
-import com.inventoryProject.models.Inventory;
-import com.inventoryProject.models.InventoryId;
 
 /**
  * InventoryController
