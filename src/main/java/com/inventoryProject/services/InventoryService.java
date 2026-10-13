@@ -2,6 +2,8 @@ package com.inventoryProject.services;
 
 import java.util.List;
 
+import org.springframework.web.bind.annotation.GetMapping;
+
 import com.inventoryProject.dto.InventoryRequestDTO;
 import com.inventoryProject.exception.ExceptionMessages;
 import com.inventoryProject.exception.ResourceNotFoundException;
@@ -48,13 +50,14 @@ public class InventoryService {
   }
 
   /**
-   * @param change: change number
+   * @param change: change number, can be either positive or negative
    *
    *                Edits the specific Inventoryid's count number.
    *
    *                Preconditions: InventoryId exists, change is an int
    *                Postconditions: InventoryId's count is modified by the change
    *                Invariants: inventroy count cannot be negative.
+   *
    *
    */
   public Inventory logInventory(int change, InventoryId id) {
@@ -69,8 +72,9 @@ public class InventoryService {
 
   }
 
-  public List<Inventory> getVariants(Long variantId, Integer boundery) {
-    return null;
+  public List<Inventory> getVariantStocks(Long variantId, Integer boundary) {
+    ProductVariant variant = variantService.find(variantId);
+    return inventoryRepository.findByVariantIdAndCountGreaterThan(variant, boundary);
 
   }
 }
