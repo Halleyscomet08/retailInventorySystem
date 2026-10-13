@@ -2,6 +2,7 @@ package com.inventoryProject.service;
 
 import static org.mockito.Mockito.when;
 
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -58,9 +59,11 @@ public class InventoryServiceTest {
   @Captor
   ArgumentCaptor<Inventory> inventoryCaptor;
 
+  // need test for null case
+  //
   /**
    * 
-   * Given there exists at least one store that has stock on hand for a variant,
+   * Given there exists at least one store that has stock on ha nd for a variant,
    * when this variant is requested, then the API returns an List of Inventory
    * entries,
    * with each entry containing the store's name and on-hand quantity for the
@@ -97,9 +100,16 @@ public class InventoryServiceTest {
     inventory5.setStore(store2);
     inventory5.setVariant(variant2);
     inventory5.setCount(5);
+    List<Inventory> repositoryReturn = List.of(inventory1, inventory2);
 
-    // dependencies: inventoryRepository, query by ID, greater than one
-    // variantRepository, query for existing variant
+    when(inventoryRepository.findByVariantIdAndCountGreaterThan(variant1, 0))
+        .thenReturn(repositoryReturn);
+    when(variantService.find(1L)).thenReturn(variant1);
+
+    inventoryService.getVariantStocks(1L, 0);
+
+    verify(variantService, times(1)).find(1L);
+    verify(inventoryRepository, times(1)).findByVariantIdAndCountGreaterThan(variant1, 0);
 
   }
 

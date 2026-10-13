@@ -62,6 +62,12 @@ public class VariantServiceTest {
 
   // given a variantID that exists, when I call find(), then the function returns
   // the correct Variant
+
+  @Test
+  void find_variantIDexists_returnsVariant() {
+
+  }
+
   // given a variantID that is null, when I call find(), then the function will
   // return an IllegalArgumentException
   // given a variantID that is blank, when I call find(), then the function wil
@@ -125,10 +131,6 @@ public class VariantServiceTest {
 
   @Test
   void create_missingValues_throwsException() {
-    // wrong file, move to new
-    //
-    // need to trigger the request validator function
-    //
 
     VariantRequestDTO badRequest = new VariantRequestDTO();
 
