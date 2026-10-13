@@ -3,6 +3,8 @@ package com.inventoryProject.services;
 import java.util.List;
 
 import com.inventoryProject.dto.VariantRequestDTO;
+import com.inventoryProject.exception.ExceptionMessages;
+import com.inventoryProject.exception.ResourceNotFoundException;
 import com.inventoryProject.models.Color;
 import com.inventoryProject.models.Product;
 import com.inventoryProject.models.ProductVariant;
@@ -31,7 +33,8 @@ public class VariantService {
   }
 
   public ProductVariant find(Long variantID) {
-    return null;
+    return variantRepository.findById(variantID)
+        .orElseThrow(() -> new ResourceNotFoundException(ExceptionMessages.VARIANT_NOT_FOUND));
   }
 
   public List<ProductVariant> findAll() {

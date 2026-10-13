@@ -6,6 +6,7 @@ public final class ExceptionMessages {
   public static final String COLOR_NOT_FOUND = "Requested Color does not exist";
   public static final String SIZE_NOT_FOUND = "Requested Size does not exist";
   public static final String STORE_NOT_FOUND = "Requested Store does not exist";
+  public static final String VARIANT_NOT_FOUND = "Requested Variant does not exist";
 
   private ExceptionMessages() {
   }
