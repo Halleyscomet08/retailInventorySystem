@@ -25,13 +25,11 @@ public class ProductVariant {
   @JoinColumn(name = "product_id")
   private Product productId;
 
-  @ManyToOne
-  @JoinColumn(name = "color_id")
-  private Color colorId;
+  @Column
+  private String color;
 
-  @ManyToOne
-  @JoinColumn(name = "size_id")
-  private Size sizeId;
+  @Column
+  private String size;
 
   @Column(nullable = false, precision = 10, scale = 2)
   private BigDecimal price;
@@ -66,28 +64,28 @@ public class ProductVariant {
     this.productId = productId;
   }
 
-  public Color getColor() {
-    return colorId;
-  }
-
-  public void setColor(Color colorId) {
-    this.colorId = colorId;
-  }
-
-  public Size getSize() {
-    return sizeId;
-  }
-
-  public void setSize(Size sizeId) {
-    this.sizeId = sizeId;
-  }
-
   public BigDecimal getPrice() {
     return price;
   }
 
   public void setPrice(BigDecimal price) {
     this.price = price;
+  }
+
+  public String getColor() {
+    return color;
+  }
+
+  public void setColor(String color) {
+    this.color = color;
+  }
+
+  public String getSize() {
+    return size;
+  }
+
+  public void setSize(String size) {
+    this.size = size;
   }
 
 }

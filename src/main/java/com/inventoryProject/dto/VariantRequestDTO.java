@@ -15,10 +15,10 @@ public class VariantRequestDTO {
   private Long productId;
 
   @NotNull(message = ExceptionMessages.LABEL_REQUIRED)
-  private Long colorId;
+  private String color;
 
   @NotNull(message = ExceptionMessages.LABEL_REQUIRED)
-  private Long sizeId;
+  private String size;
 
   @NotNull(message = ExceptionMessages.LABEL_REQUIRED)
   private BigDecimal price;
@@ -34,28 +34,28 @@ public class VariantRequestDTO {
     this.productId = productId;
   }
 
-  public Long getColorId() {
-    return colorId;
-  }
-
-  public void setColorId(Long colorId) {
-    this.colorId = colorId;
-  }
-
-  public Long getSizeId() {
-    return sizeId;
-  }
-
-  public void setSizeId(Long sizeId) {
-    this.sizeId = sizeId;
-  }
-
   public BigDecimal getPrice() {
     return price;
   }
 
   public void setPrice(BigDecimal price) {
     this.price = price;
+  }
+
+  public String getColor() {
+    return color;
+  }
+
+  public void setColor(String color) {
+    this.color = color;
+  }
+
+  public String getSize() {
+    return size;
+  }
+
+  public void setSize(String size) {
+    this.size = size;
   }
 
 }

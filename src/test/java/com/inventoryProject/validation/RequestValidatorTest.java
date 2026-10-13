@@ -42,8 +42,8 @@ public class RequestValidatorTest {
     List<String> assertedExceptions = new ArrayList<String>();
     assertedExceptions.add("price: " + ExceptionMessages.LABEL_REQUIRED);
     assertedExceptions.add("productId: " + ExceptionMessages.LABEL_REQUIRED);
-    assertedExceptions.add("sizeId: " + ExceptionMessages.LABEL_REQUIRED);
-    assertedExceptions.add("colorId: " + ExceptionMessages.LABEL_REQUIRED);
+    assertedExceptions.add("size: " + ExceptionMessages.LABEL_REQUIRED);
+    assertedExceptions.add("color: " + ExceptionMessages.LABEL_REQUIRED);
 
     Set<String> assertString = new HashSet<String>(assertedExceptions);
     Set<String> assertResponse = new HashSet<String>(exception.getErrorMessages());

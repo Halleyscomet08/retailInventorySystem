@@ -1,14 +1,14 @@
 package com.inventoryProject.service;
 
-import static org.mockito.Mockito.when;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.Mockito.any;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoInteractions;
+import static org.mockito.Mockito.when;
 
 import java.math.BigDecimal;
 
@@ -22,14 +22,10 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.inventoryProject.dto.VariantRequestDTO;
 import com.inventoryProject.exception.FieldsNotValidException;
-import com.inventoryProject.models.Color;
 import com.inventoryProject.models.Product;
 import com.inventoryProject.models.ProductVariant;
-import com.inventoryProject.models.Size;
 import com.inventoryProject.repositories.ProductVariantRepository;
-import com.inventoryProject.services.ColorService;
 import com.inventoryProject.services.ProductService;
-import com.inventoryProject.services.SizeService;
 import com.inventoryProject.services.VariantService;
 import com.inventoryProject.validation.RequestValidator;
 
@@ -44,12 +40,6 @@ public class VariantServiceTest {
 
   @Mock
   ProductService productService;
-
-  @Mock
-  ColorService colorService;
-
-  @Mock
-  SizeService sizeService;
 
   @Mock
   RequestValidator requestValidator;
@@ -82,28 +72,22 @@ public class VariantServiceTest {
     // Arrange
     Product product = new Product();
     product.setproductId(1L);
-    Color color = new Color();
-    color.setColorId(3L);
-    Size size = new Size();
-    size.setSizeId(2L);
 
     ProductVariant variant = new ProductVariant();
     variant.setVariantId(1L);
     variant.setProduct(product);
-    variant.setColor(color);
-    variant.setSize(size);
+    variant.setColor("Red");
+    variant.setSize("XL");
     variant.setPrice(BigDecimal.valueOf(100));
 
     VariantRequestDTO variantRequest = new VariantRequestDTO();
     variantRequest.setProductId(1L);
-    variantRequest.setColorId(3L);
-    variantRequest.setSizeId(2L);
+    variantRequest.setColor("Red");
+    variantRequest.setSize("XL");
     variantRequest.setPrice(BigDecimal.valueOf(100));
 
     when(variantRepository.save(any(ProductVariant.class))).thenReturn(variant);
     when(productService.findByProductId(1L)).thenReturn(product);
-    when(colorService.find(3L)).thenReturn(color);
-    when(sizeService.find(2L)).thenReturn(size);
 
     // Act
     ProductVariant response = variantService.create(variantRequest);
@@ -115,14 +99,14 @@ public class VariantServiceTest {
     // check if dto is assigned correctly
     assertNull(captured.getVariantId());
     assertEquals(product.getproductId(), captured.getProductId().getproductId());
-    assertEquals(color.getColorId(), captured.getColor().getColorId());
-    assertEquals(size.getSizeId(), captured.getSize().getSizeId());
+    assertEquals("Red", captured.getColor());
+    assertEquals("XL", captured.getSize());
     assertEquals(BigDecimal.valueOf(100), captured.getPrice());
 
     // check if save is called
     assertNotNull(response.getProductId().getproductId());
-    assertNotNull(response.getColor().getColorId());
-    assertNotNull(response.getSize().getSizeId());
+    assertNotNull(response.getColor());
+    assertNotNull(response.getSize());
     assertNotNull(response.getPrice());
 
   }

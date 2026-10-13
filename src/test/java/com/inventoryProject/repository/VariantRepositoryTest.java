@@ -15,15 +15,11 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 
 import com.inventoryProject.exception.ResourceNotFoundException;
 import com.inventoryProject.models.Brand;
-import com.inventoryProject.models.Color;
 import com.inventoryProject.models.Product;
 import com.inventoryProject.models.ProductVariant;
-import com.inventoryProject.models.Size;
 import com.inventoryProject.repositories.BrandRepository;
-import com.inventoryProject.repositories.ColorRepository;
 import com.inventoryProject.repositories.ProductRepository;
 import com.inventoryProject.repositories.ProductVariantRepository;
-import com.inventoryProject.repositories.SizeRepository;
 
 import jakarta.transaction.Transactional;
 
@@ -40,10 +36,6 @@ public class VariantRepositoryTest {
   ProductRepository productRepository;
   @Autowired
   BrandRepository brandRepository;
-  @Autowired
-  ColorRepository colorRepository;
-  @Autowired
-  SizeRepository sizeRepository;
   @Autowired
   TestEntityManager testEntityManager;
 
@@ -73,22 +65,15 @@ public class VariantRepositoryTest {
     savedProduct1 = productRepository.save(product1);
     savedProduct2 = productRepository.save(product2);
 
-    Color color1 = new Color();
-    color1.setColorLabel("Red");
-    Color savedColor1 = colorRepository.save(color1);
-    Size size1 = new Size();
-    size1.setSizeLabel("S");
-    Size savedSize1 = sizeRepository.save(size1);
-
     ProductVariant variant1 = new ProductVariant();
     variant1.setProduct(savedProduct1);
-    variant1.setColor(savedColor1);
-    variant1.setSize(savedSize1);
+    variant1.setColor("Red");
+    variant1.setSize("XL");
     variant1.setPrice(BigDecimal.valueOf(10));
     ProductVariant variant2 = new ProductVariant();
     variant2.setProduct(savedProduct2);
-    variant2.setColor(savedColor1);
-    variant2.setSize(savedSize1);
+    variant2.setColor("Red");
+    variant2.setSize("XL");
     variant2.setPrice(BigDecimal.valueOf(10));
 
     savedVariant1 = productVariantRepository.save(variant1);

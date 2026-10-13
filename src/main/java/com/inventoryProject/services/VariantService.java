@@ -5,10 +5,8 @@ import java.util.List;
 import com.inventoryProject.dto.VariantRequestDTO;
 import com.inventoryProject.exception.ExceptionMessages;
 import com.inventoryProject.exception.ResourceNotFoundException;
-import com.inventoryProject.models.Color;
 import com.inventoryProject.models.Product;
 import com.inventoryProject.models.ProductVariant;
-import com.inventoryProject.models.Size;
 import com.inventoryProject.repositories.ProductVariantRepository;
 import com.inventoryProject.validation.RequestValidator;
 
@@ -19,16 +17,12 @@ public class VariantService {
 
   private final ProductVariantRepository variantRepository;
   private final ProductService productService;
-  private final ColorService colorService;
-  private final SizeService sizeService;
   private final RequestValidator requestValidator;
 
   public VariantService(ProductVariantRepository variantRepository, ProductService productService,
-      ColorService colorService, SizeService sizeService, RequestValidator requestValidator) {
+      RequestValidator requestValidator) {
     this.variantRepository = variantRepository;
     this.productService = productService;
-    this.colorService = colorService;
-    this.sizeService = sizeService;
     this.requestValidator = requestValidator;
   }
 
@@ -57,13 +51,11 @@ public class VariantService {
     requestValidator.validateRequest(variant);
 
     Product product = productService.findByProductId(variant.getProductId());
-    Color color = colorService.find(variant.getColorId());
-    Size size = sizeService.find(variant.getSizeId());
 
     ProductVariant variantObject = new ProductVariant();
     variantObject.setProduct(product);
-    variantObject.setColor(color);
-    variantObject.setSize(size);
+    variantObject.setColor(variant.getColor());
+    variantObject.setSize(variant.getSize());
     variantObject.setPrice(variant.getPrice());
 
     ProductVariant response = variantRepository.save(variantObject);
