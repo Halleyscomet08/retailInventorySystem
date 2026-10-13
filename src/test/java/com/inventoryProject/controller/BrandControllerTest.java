@@ -30,7 +30,7 @@ public class BrandControllerTest {
   BrandService brandService;
 
   @Test
-  void getBrand_givenID() throws Exception {
+  void get_validId_returnBrand() throws Exception {
     Brand brand = new Brand();
     brand.setBrandID(1L);
 
