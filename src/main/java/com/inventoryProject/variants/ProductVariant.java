@@ -1,7 +1,9 @@
-package com.inventoryProject.models;
+package com.inventoryProject.variants;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+
+import com.inventoryProject.product.Product;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

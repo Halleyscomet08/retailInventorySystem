@@ -1,7 +1,7 @@
 package com.inventoryProject.inventory;
 
-import com.inventoryProject.models.ProductVariant;
-import com.inventoryProject.models.Store;
+import com.inventoryProject.store.Store;
+import com.inventoryProject.variants.ProductVariant;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;

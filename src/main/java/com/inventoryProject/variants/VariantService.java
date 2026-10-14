@@ -1,13 +1,12 @@
-package com.inventoryProject.services;
+package com.inventoryProject.variants;
 
 import java.util.List;
 
 import com.inventoryProject.dto.VariantRequestDTO;
 import com.inventoryProject.exception.ExceptionMessages;
 import com.inventoryProject.exception.ResourceNotFoundException;
-import com.inventoryProject.models.Product;
-import com.inventoryProject.models.ProductVariant;
-import com.inventoryProject.repositories.ProductVariantRepository;
+import com.inventoryProject.product.Product;
+import com.inventoryProject.product.ProductService;
 import com.inventoryProject.validation.RequestValidator;
 
 /**

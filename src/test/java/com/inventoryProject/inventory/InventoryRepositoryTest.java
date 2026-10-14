@@ -12,14 +12,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 
-import com.inventoryProject.models.Brand;
-import com.inventoryProject.models.Product;
-import com.inventoryProject.models.ProductVariant;
-import com.inventoryProject.models.Store;
-import com.inventoryProject.repositories.BrandRepository;
-import com.inventoryProject.repositories.ProductRepository;
-import com.inventoryProject.repositories.ProductVariantRepository;
-import com.inventoryProject.repositories.StoreRepository;
+import com.inventoryProject.brand.Brand;
+import com.inventoryProject.brand.BrandRepository;
+import com.inventoryProject.product.Product;
+import com.inventoryProject.product.ProductRepository;
+import com.inventoryProject.store.Store;
+import com.inventoryProject.store.StoreRepository;
+import com.inventoryProject.variants.ProductVariant;
+import com.inventoryProject.variants.ProductVariantRepository;
 
 import jakarta.transaction.Transactional;
 
@@ -130,7 +130,6 @@ public class InventoryRepositoryTest {
   void findByVariantID_givenValidIdAndBoundary_returnsList() {
     List<Inventory> response = inventoryRepository.findByVariantIdAndCountGreaterThan(savedVariant1, 0);
 
-    System.out.println(response);
     assertTrue(response.stream().allMatch(n -> (n.getVariantId().equals(savedVariant1.getVariantId()))));
     assertTrue(response.stream().allMatch(n -> (n.getCount() > 0)));
 

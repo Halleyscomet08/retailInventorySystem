@@ -1,12 +1,12 @@
-package com.inventoryProject.service;
+package com.inventoryProject.product;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.Mockito.when;
-import static org.mockito.Mockito.any;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.verifyNoInteractions;
+import static org.mockito.Mockito.when;
 
 import java.util.Optional;
 
@@ -16,15 +16,11 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import com.inventoryProject.brand.Brand;
+import com.inventoryProject.brand.BrandService;
 import com.inventoryProject.dto.ProductResponseDTO;
 import com.inventoryProject.dto.Productdto;
 import com.inventoryProject.exception.FieldsNotValidException;
-import com.inventoryProject.models.Brand;
-import com.inventoryProject.models.Product;
-import com.inventoryProject.repositories.BrandRepository;
-import com.inventoryProject.repositories.ProductRepository;
-import com.inventoryProject.services.BrandService;
-import com.inventoryProject.services.ProductService;
 import com.inventoryProject.validation.RequestValidator;
 
 /**

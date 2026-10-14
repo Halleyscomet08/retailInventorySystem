@@ -1,4 +1,7 @@
-package com.inventoryProject.models;
+package com.inventoryProject.product;
+
+import com.inventoryProject.brand.Brand;
+import com.inventoryProject.models.EntityMode;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

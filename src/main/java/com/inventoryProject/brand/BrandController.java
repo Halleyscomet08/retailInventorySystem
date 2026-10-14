@@ -1,4 +1,6 @@
-package com.inventoryProject.controllers;
+package com.inventoryProject.brand;
+
+import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,10 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.inventoryProject.dto.BrandDTO;
-import com.inventoryProject.models.Brand;
-import com.inventoryProject.services.BrandService;
-
-import java.util.List;
 
 import jakarta.validation.Valid;
 

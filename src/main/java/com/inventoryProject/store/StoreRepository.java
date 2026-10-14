@@ -1,8 +1,6 @@
-package com.inventoryProject.repositories;
+package com.inventoryProject.store;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-
-import com.inventoryProject.models.Store;
 
 /**
  * StoreRepository

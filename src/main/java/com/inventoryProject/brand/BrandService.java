@@ -1,15 +1,14 @@
-package com.inventoryProject.services;
+package com.inventoryProject.brand;
+
+import java.util.List;
 
 import org.springframework.stereotype.Service;
 
 import com.inventoryProject.dto.BrandDTO;
-import com.inventoryProject.models.Brand;
 import com.inventoryProject.exception.ResourceNotFoundException;
 import com.inventoryProject.models.EntityMode;
-import com.inventoryProject.repositories.BrandRepository;
 import com.inventoryProject.validation.RequestValidator;
 
-import java.util.List;
 import jakarta.transaction.Transactional;
 
 /**

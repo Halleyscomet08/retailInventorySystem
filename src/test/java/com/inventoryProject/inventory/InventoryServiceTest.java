@@ -24,11 +24,11 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.inventoryProject.dto.InventoryRequestDTO;
 import com.inventoryProject.exception.FieldsNotValidException;
-import com.inventoryProject.models.ProductVariant;
-import com.inventoryProject.models.Store;
-import com.inventoryProject.services.StoreService;
-import com.inventoryProject.services.VariantService;
+import com.inventoryProject.store.Store;
+import com.inventoryProject.store.StoreService;
 import com.inventoryProject.validation.RequestValidator;
+import com.inventoryProject.variants.ProductVariant;
+import com.inventoryProject.variants.VariantService;
 
 /**
  * InventoryServiceTest

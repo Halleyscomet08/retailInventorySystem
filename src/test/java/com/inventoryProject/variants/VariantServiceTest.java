@@ -1,4 +1,4 @@
-package com.inventoryProject.service;
+package com.inventoryProject.variants;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -22,11 +22,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.inventoryProject.dto.VariantRequestDTO;
 import com.inventoryProject.exception.FieldsNotValidException;
-import com.inventoryProject.models.Product;
-import com.inventoryProject.models.ProductVariant;
-import com.inventoryProject.repositories.ProductVariantRepository;
-import com.inventoryProject.services.ProductService;
-import com.inventoryProject.services.VariantService;
+import com.inventoryProject.product.Product;
+import com.inventoryProject.product.ProductService;
 import com.inventoryProject.validation.RequestValidator;
 
 /**

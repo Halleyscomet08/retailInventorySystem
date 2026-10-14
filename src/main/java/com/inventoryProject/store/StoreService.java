@@ -1,9 +1,7 @@
-package com.inventoryProject.services;
+package com.inventoryProject.store;
 
 import com.inventoryProject.exception.ExceptionMessages;
 import com.inventoryProject.exception.ResourceNotFoundException;
-import com.inventoryProject.models.Store;
-import com.inventoryProject.repositories.StoreRepository;
 
 /**
  * StoreService

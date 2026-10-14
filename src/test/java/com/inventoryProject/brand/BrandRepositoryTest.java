@@ -1,4 +1,4 @@
-package com.inventoryProject.repository;
+package com.inventoryProject.brand;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -11,9 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 
-import com.inventoryProject.models.Brand;
 import com.inventoryProject.models.EntityMode;
-import com.inventoryProject.repositories.BrandRepository;
 
 import jakarta.transaction.Transactional;
 

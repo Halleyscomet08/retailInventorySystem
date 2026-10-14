@@ -1,4 +1,4 @@
-package com.inventoryProject.repository;
+package com.inventoryProject.variants;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -13,13 +13,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 
+import com.inventoryProject.brand.Brand;
+import com.inventoryProject.brand.BrandRepository;
 import com.inventoryProject.exception.ResourceNotFoundException;
-import com.inventoryProject.models.Brand;
-import com.inventoryProject.models.Product;
-import com.inventoryProject.models.ProductVariant;
-import com.inventoryProject.repositories.BrandRepository;
-import com.inventoryProject.repositories.ProductRepository;
-import com.inventoryProject.repositories.ProductVariantRepository;
+import com.inventoryProject.product.Product;
+import com.inventoryProject.product.ProductRepository;
 
 import jakarta.transaction.Transactional;
 

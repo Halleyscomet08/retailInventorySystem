@@ -1,4 +1,4 @@
-package com.inventoryProject.models;
+package com.inventoryProject.store;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

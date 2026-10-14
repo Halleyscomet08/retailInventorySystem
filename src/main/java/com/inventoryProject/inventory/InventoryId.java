@@ -2,8 +2,8 @@ package com.inventoryProject.inventory;
 
 import java.io.Serializable;
 
-import com.inventoryProject.models.ProductVariant;
-import com.inventoryProject.models.Store;
+import com.inventoryProject.store.Store;
+import com.inventoryProject.variants.ProductVariant;
 
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
